@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation - PerfSage</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #7C3AED; --primary-dark: #6D28D9; --accent: #22D3EE;
+      --dark: #0F172A; --dark-light: #1E293B; --text: #F8FAFC; --text-muted: #94A3B8;
+    }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--dark); color: var(--text); line-height: 1.6; }
+    .gradient-bg { background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 50%, var(--dark) 100%); min-height: 100vh; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; border-bottom: 1px solid rgba(124, 58, 237, 0.2); }
+    .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(90deg, var(--accent), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.95rem; }
+    nav a:hover { color: var(--accent); }
+    .container { max-width: 900px; margin: 0 auto; padding: 3rem 5%; }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--text-muted); margin-bottom: 3rem; }
+    .doc-section { margin-bottom: 3rem; }
+    .doc-section h2 { font-size: 1.75rem; color: var(--accent); margin-bottom: 1rem; }
+    .doc-section p { color: var(--text-muted); margin-bottom: 1rem; }
+    .doc-card { background: var(--dark-light); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .doc-card a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .doc-card a:hover { text-decoration: underline; }
+    .code-block { background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 0.875rem; overflow-x: auto; margin: 1rem 0; }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(124, 58, 237, 0.2); color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="gradient-bg">
+    <nav>
+      <a href="/" class="logo">PerfSage</a>
+      <div>
+        <a href="/">Home</a>
+        <a href="docs.html">Docs</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="https://github.com/perfsage">GitHub</a>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Documentation</h1>
+      <p class="subtitle">Getting started with PerfSage SLO Reporter</p>
+      <div class="doc-section">
+        <h2>Quick Start</h2>
+        <p>Follow these steps to get started with PerfSage SLO Reporter for JMeter.</p>
+        <div class="doc-card">
+          <h3>1. Add the Plugin</h3>
+          <div class="code-block">mvn dependency:copy -Dartifact=com.perfsage:perfsage-slo-reporter:0.1.0:jar -DoutputDirectory=$JMETER_HOME/lib</div>
+        </div>
+        <div class="doc-card">
+          <h3>2. Configure SLO Thresholds</h3>
+          <div class="code-block"># slo.properties
+response_time.p95.threshold=500
+response_time.p99.threshold=1000
+error_rate.threshold=0.01
+success_rate.threshold=0.99</div>
+        </div>
+        <div class="doc-card">
+          <h3>3. Run JMeter Tests</h3>
+          <div class="code-block">jmeter -n -t your-test-plan.jmx -l results.jtl</div>
+        </div>
+        <div class="doc-card">
+          <h3>4. Generate Reports</h3>
+          <div class="code-block">java -jar perfsage-slo-reporter-0.1.0.jar --input results.jtl --config slo.properties --output report/</div>
+        </div>
+      </div>
+      <div class="doc-section">
+        <h2>Resources</h2>
+        <div class="doc-card">
+          <a href="https://github.com/perfsage/perfsage-slo-reporter">GitHub Repository</a>
+          <p>Source code, issues, and discussions</p>
+        </div>
+        <div class="doc-card">
+          <a href="https://github.com/perfsage/perfsage-slo-reporter/blob/main/SETUP.md">Setup Guide</a>
+          <p>Detailed installation and configuration</p>
+        </div>
+        <div class="doc-card">
+          <a href="https://github.com/perfsage/perfsage-slo-reporter/blob/main/CONFIG.md">Configuration Guide</a>
+          <p>SLO threshold and report settings</p>
+        </div>
+        <div class="doc-card">
+          <a href="https://github.com/perfsage/perfsage-slo-reporter/blob/main/EXAMPLES.md">Usage Examples</a>
+          <p>Real-world examples and use cases</p>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>C 2026 PerfSage. MIT Licensed.</p>
+    </footer>
+  </div>
+</body>
+</html>
