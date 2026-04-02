@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Hero from '../components/Hero.astro';
+import FeaturesGrid from '../components/FeaturesGrid.astro';
+import PluginSection from '../components/PluginSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout title="PerfSage - AI-Powered Performance Engineering">
+  <div class="gradient-bg">
+    <SiteNav variant="home" />
+    <Hero />
+    <FeaturesGrid />
+    <PluginSection />
+    <SiteFooter />
+  </div>
+</BaseLayout>

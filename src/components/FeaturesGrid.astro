@@ -1,0 +1,41 @@
+---
+const features = [
+  {
+    icon: '🤖',
+    title: 'AI-Powered Insights',
+    body: 'Automatic test result analysis with intelligent anomaly detection and root cause suggestions.',
+  },
+  {
+    icon: '📊',
+    title: 'Smart Dashboards',
+    body: 'Beautiful, auto-generated performance reports with SLO tracking and trend analysis.',
+  },
+  {
+    icon: '🔌',
+    title: 'Open Source Plugins',
+    body: 'Free, community-driven JMeter plugins built for modern performance engineers.',
+  },
+  {
+    icon: '📚',
+    title: 'Knowledge Hub',
+    body: 'Curated guides, best practices, and tips for performance engineering in the AI era.',
+  },
+];
+---
+
+<section id="features" class="features">
+  <h2 class="section-title">Why <span class="gradient-text">PerfSage</span>?</h2>
+  <div class="features-grid">
+    {
+      features.map((f) => (
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            {f.icon}
+          </div>
+          <h3>{f.title}</h3>
+          <p>{f.body}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

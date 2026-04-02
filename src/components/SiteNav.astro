@@ -1,0 +1,21 @@
+---
+interface Props {
+  variant?: 'home' | 'inner';
+}
+
+const { variant = 'inner' } = Astro.props;
+const logoClass = variant === 'home' ? 'logo' : 'logo logo-compact';
+---
+
+<nav class="site-nav" aria-label="Primary">
+  <a href="/" class:list={[logoClass]}>
+    {variant === 'home' && <span class="logo-icon" aria-hidden="true">⚡</span>}
+    PerfSage
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="/">Home</a>
+    <a class="nav-link" href="/docs/">Docs</a>
+    <a class="nav-link" href="/changelog/">Changelog</a>
+    <a class="nav-link" href="https://github.com/perfsage" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</nav>

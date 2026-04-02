@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+---
+
+<BaseLayout title="Changelog - PerfSage" description="Release history for PerfSage SLO Reporter.">
+  <div class="gradient-bg" style="display: flex; flex-direction: column; min-height: 100vh;">
+    <SiteNav />
+    <main class="page-container">
+      <h1>Changelog</h1>
+      <p class="subtitle">All notable changes to PerfSage SLO Reporter</p>
+
+      <article class="changelog-entry">
+        <div class="version">
+          v0.1.0 <span class="badge-inline badge-new">Initial Release</span>
+        </div>
+        <div class="date">Coming Soon</div>
+        <ul class="changes">
+          <li>Core plugin architecture with Maven Central publishing pipeline</li>
+          <li>SLO threshold configuration via properties file</li>
+          <li>JMeter test result parsing and analysis engine</li>
+          <li>CI/CD workflow with build, code quality, and security scanning</li>
+          <li>GitHub Actions for automated releases and artifact publishing</li>
+          <li>Comprehensive documentation: README, architecture, setup guides</li>
+          <li>Sample JMeter test plans and SLO configurations</li>
+          <li>MIT License for open-source community adoption</li>
+        </ul>
+      </article>
+    </main>
+    <footer class="page-footer">
+      <p>&copy; 2026 PerfSage. MIT Licensed.</p>
+    </footer>
+  </div>
+</BaseLayout>

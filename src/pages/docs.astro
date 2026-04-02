@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+---
+
+<BaseLayout title="Documentation - PerfSage" description="Getting started with PerfSage SLO Reporter for JMeter.">
+  <div class="gradient-bg" style="display: flex; flex-direction: column; min-height: 100vh;">
+    <SiteNav />
+    <main class="page-container">
+      <h1>Documentation</h1>
+      <p class="subtitle">Getting started with PerfSage SLO Reporter</p>
+
+      <section class="doc-section" aria-labelledby="quick-start-heading">
+        <h2 id="quick-start-heading">Quick Start</h2>
+        <p>Follow these steps to get started with PerfSage SLO Reporter for JMeter.</p>
+        <div class="doc-card">
+          <h3>1. Add the Plugin</h3>
+          <div class="code-block">
+            mvn dependency:copy -Dartifact=com.perfsage:perfsage-slo-reporter:0.1.0:jar -DoutputDirectory=$JMETER_HOME/lib
+          </div>
+        </div>
+        <div class="doc-card">
+          <h3>2. Configure SLO Thresholds</h3>
+          <div class="code-block">
+{`# slo.properties
+response_time.p95.threshold=500
+response_time.p99.threshold=1000
+error_rate.threshold=0.01
+success_rate.threshold=0.99`}
+          </div>
+        </div>
+        <div class="doc-card">
+          <h3>3. Run JMeter Tests</h3>
+          <div class="code-block">jmeter -n -t your-test-plan.jmx -l results.jtl</div>
+        </div>
+        <div class="doc-card">
+          <h3>4. Generate Reports</h3>
+          <div class="code-block">
+            java -jar perfsage-slo-reporter-0.1.0.jar --input results.jtl --config slo.properties --output report/
+          </div>
+        </div>
+      </section>
+
+      <section class="doc-section" aria-labelledby="resources-heading">
+        <h2 id="resources-heading">Resources</h2>
+        <div class="doc-card">
+          <a href="https://github.com/perfsage/perfsage-slo-reporter" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+          <p>Source code, issues, and discussions</p>
+        </div>
+        <div class="doc-card">
+          <a href="https://github.com/perfsage/perfsage-slo-reporter/blob/main/SETUP.md" target="_blank" rel="noopener noreferrer"
+            >Setup Guide</a
+          >
+          <p>Detailed installation and configuration</p>
+        </div>
+        <div class="doc-card">
+          <a
+            href="https://github.com/perfsage/perfsage-slo-reporter/blob/main/CONFIG.md"
+            target="_blank"
+            rel="noopener noreferrer">Configuration Guide</a
+          >
+          <p>SLO threshold and report settings</p>
+        </div>
+        <div class="doc-card">
+          <a
+            href="https://github.com/perfsage/perfsage-slo-reporter/blob/main/EXAMPLES.md"
+            target="_blank"
+            rel="noopener noreferrer">Usage Examples</a
+          >
+          <p>Real-world examples and use cases</p>
+        </div>
+      </section>
+    </main>
+    <footer class="page-footer">
+      <p>&copy; 2026 PerfSage. MIT Licensed.</p>
+    </footer>
+  </div>
+</BaseLayout>
