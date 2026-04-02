@@ -1,0 +1,16 @@
+---
+description: PerfSage site — design, accessibility, and Astro conventions
+alwaysApply: true
+---
+
+# Frontend and design
+
+- **Stack**: Astro static site, `src/pages/` for routes, `src/components/` for UI, global tokens in `src/styles/global.css`. Prefer components over large inline style blocks.
+- **Design tokens**: Use existing CSS variables (`--primary`, `--accent`, `--dark`, `--text`, `--text-muted`). Keep dark theme contrast readable; avoid low-contrast gray on gray.
+- **Navigation**: Use trailing slashes for section roots (`/docs/`, `/changelog/`) so static hosts do not resolve extensionless paths to legacy `*.html` stubs.
+- **Links**: External links that open in a new tab must include `target="_blank"` and `rel="noopener noreferrer"`.
+- **Accessibility**: Meaningful `lang` on layouts; landmarks (`nav` with `aria-label` where appropriate); interactive elements keyboard-focusable; do not rely only on color for state.
+- **Performance**: Prefer system font stack or minimal web fonts; lazy-load heavy images if added; keep hero and above-the-fold lean.
+- **Testing**: Run `npm run test:e2e` before merging; extend Playwright smoke tests when adding primary sections or routes.
+- **Analysis**: For competitor or reference sites, use `npm run analyze-site -- <url>` and review `artifacts/site-analysis/`. In Cursor, enable the **Playwright MCP** (see [.cursor/mcp.json](.cursor/mcp.json)) for live browser automation alongside that script.
+- **Custom domain**: If `*.github.io` works but `perfsage.com` shows GitHub’s “Site not found” 404, follow [.github/CUSTOM_DOMAIN_FIX.md](.github/CUSTOM_DOMAIN_FIX.md) (usually: Pages source = GitHub Actions, then re-save the custom domain in repo Settings).

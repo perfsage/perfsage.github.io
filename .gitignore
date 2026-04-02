@@ -7,4 +7,6 @@ artifacts/
 .env
 .env.*
 !.env.example
-.cursor/
+.cursor/*
+!.cursor/rules/
+!.cursor/mcp.json
