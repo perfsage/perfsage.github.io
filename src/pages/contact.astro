@@ -33,7 +33,8 @@ import SiteFooter from '../components/SiteFooter.astro';
     <section class="section">
       <div class="container">
         <div class="contact-grid">
-          <!-- Contact links -->
+
+          <!-- Social links -->
           <div data-reveal>
             <h2 class="section-title">Find Me Online</h2>
 
@@ -43,9 +44,7 @@ import SiteFooter from '../components/SiteFooter.astro';
                   <span class="contact-icon" aria-hidden="true">&#9889;</span>
                   <strong>GitHub</strong>
                 </div>
-                <a href="https://github.com/perfsage" target="_blank" rel="noopener noreferrer"
-                  >github.com/perfsage</a
-                >
+                <a href="https://github.com/perfsage" target="_blank" rel="noopener noreferrer">github.com/perfsage</a>
               </div>
 
               <div class="contact-card">
@@ -53,9 +52,7 @@ import SiteFooter from '../components/SiteFooter.astro';
                   <span class="contact-icon" aria-hidden="true">in</span>
                   <strong>LinkedIn</strong>
                 </div>
-                <a href="https://linkedin.com/in/aashu320" target="_blank" rel="noopener noreferrer"
-                  >linkedin.com/in/aashu320</a
-                >
+                <a href="https://linkedin.com/in/aashu320" target="_blank" rel="noopener noreferrer">linkedin.com/in/aashu320</a>
               </div>
 
               <div class="contact-card">
@@ -68,22 +65,10 @@ import SiteFooter from '../components/SiteFooter.astro';
 
               <div class="contact-card">
                 <div style="display:flex;align-items:center;gap:12px;">
-                  <span class="contact-icon" aria-hidden="true">&#9678;</span>
-                  <strong>Instagram</strong>
+                  <span class="contact-icon" aria-hidden="true">&#128197;</span>
+                  <strong>Book a Call (Topmate)</strong>
                 </div>
-                <a href="https://instagram.com/aashu320" target="_blank" rel="noopener noreferrer"
-                  >instagram.com/aashu320</a
-                >
-              </div>
-
-              <div class="contact-card">
-                <div style="display:flex;align-items:center;gap:12px;">
-                  <span class="contact-icon" aria-hidden="true">f</span>
-                  <strong>Facebook</strong>
-                </div>
-                <a href="https://facebook.com/aashish.bajpai.52" target="_blank" rel="noopener noreferrer"
-                  >facebook.com/aashish.bajpai.52</a
-                >
+                <a href="https://topmate.io/abajpai/659595" target="_blank" rel="noopener noreferrer">topmate.io/abajpai</a>
               </div>
 
               <div class="contact-card">
@@ -96,51 +81,46 @@ import SiteFooter from '../components/SiteFooter.astro';
             </div>
           </div>
 
-          <!-- Contact form -->
+          <!-- Email form -->
           <div class="card" data-reveal>
             <h2 class="section-title">Send a Message</h2>
             <p class="section-subtitle" style="margin-top: 8px;">
-              Visual contact form &mdash; wire to Formspree or Netlify Forms when ready for production.
+              Write your message below and hit send &mdash; your email client will open with everything pre-filled.
             </p>
 
-            <form
-              onsubmit="event.preventDefault();var b=this.querySelector('button[type=submit]');if(b){b.textContent='Sent \u2713';setTimeout(function(){b.textContent='Submit Message';},2500);}"
-              novalidate
-            >
-              <div class="field">
-                <label for="contact-name">Name</label>
-                <input id="contact-name" name="name" type="text" placeholder="Your name" autocomplete="name" />
-              </div>
-              <div class="field">
-                <label for="contact-email">Email</label>
-                <input
-                  id="contact-email"
-                  name="email"
-                  type="email"
-                  placeholder="you@domain.com"
-                  autocomplete="email"
-                />
-              </div>
-              <div class="field">
-                <label for="contact-subject">Subject</label>
-                <select id="contact-subject" name="subject">
-                  <option value="consulting">Consulting</option>
-                  <option value="mentorship">Mentorship</option>
-                  <option value="open_source">Open Source</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="contact-message">Message</label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  placeholder="Tell me what you're building and what success looks like..."></textarea>
-              </div>
-              <div class="form-actions">
-                <button class="btn btn-primary btn-submit" type="submit">Submit Message</button>
-              </div>
-            </form>
+            <div class="field" style="margin-top: 20px;">
+              <label for="contact-message">Your Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder="Tell me what you're building and what success looks like..."
+              ></textarea>
+            </div>
+
+            <div class="field">
+              <label for="contact-subject">Subject <span style="color:var(--muted-2);font-weight:400;">(optional, defaults to &ldquo;PerfSage Query&rdquo;)</span></label>
+              <input
+                id="contact-subject"
+                name="subject"
+                type="text"
+                placeholder="PerfSage Query"
+              />
+            </div>
+
+            <div class="form-actions">
+              <button
+                id="send-email-btn"
+                class="btn btn-primary btn-submit"
+                type="button"
+                aria-label="Open in Email Client"
+              >
+                &#9993; Open in Email Client
+              </button>
+            </div>
+
+            <p class="send-hint">
+              Sends to <code>aashish.bajpai2@gmail.com</code> via your default email app.
+            </p>
           </div>
         </div>
       </div>
@@ -149,3 +129,32 @@ import SiteFooter from '../components/SiteFooter.astro';
 
   <SiteFooter />
 </BaseLayout>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('send-email-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var msg = (document.getElementById('contact-message').value || '').trim();
+      var subj = (document.getElementById('contact-subject').value || '').trim() || 'PerfSage Query';
+      var mailto = 'mailto:aashish.bajpai2@gmail.com'
+        + '?subject=' + encodeURIComponent(subj)
+        + (msg ? '&body=' + encodeURIComponent(msg) : '');
+      window.location.href = mailto;
+    });
+  })();
+</script>
+
+<style>
+  .send-hint {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--muted-2);
+  }
+
+  .send-hint code {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--teal);
+    font-size: 0.78rem;
+  }
+</style>

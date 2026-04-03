@@ -27,12 +27,13 @@ test.describe('Smoke', () => {
     expect(errors, `Console errors on about: ${errors.join('; ')}`).toEqual([]);
   });
 
-  test('contact — loads title and hero heading', async ({ page }) => {
+  test('contact — loads title, hero heading and email button', async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (e) => errors.push(e.message));
     await page.goto('/contact/', { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveTitle(/Contact/i);
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/Fast/i);
+    await expect(page.getByRole('button', { name: /Open in Email Client/i })).toBeVisible();
     await expect(page.getByRole('contentinfo')).toBeVisible();
     expect(errors, `Console errors on contact: ${errors.join('; ')}`).toEqual([]);
   });
