@@ -1,0 +1,31 @@
+---
+description: Core project rules — always loaded
+alwaysApply: true
+---
+
+# Project: OSS Contribution
+
+## Stack Context
+- This is an open-source GitHub repository. Follow the existing contribution guidelines.
+- Use GitHub MCP and Playwright MCP for information — do not ask me to fetch data you can retrieve yourself.
+
+## Autonomous Workflow Loop
+When given a task, follow this loop without interruption:
+
+1. **ANALYZE** — Read relevant files. Use GitHub MCP to check open issues, PR comments, and existing tests. Do not prompt me for this.
+2. **BLUEPRINT** — Write a concise plan in comments or a `workflow_state.md` scratch file. Then execute immediately.
+3. **CONSTRUCT** — Implement the full solution. No partial work. No placeholders.
+4. **VALIDATE** — Run tests. If Playwright tests exist, run them. If linter/formatter exists, run it.
+5. **ITERATE** — If any test or lint fails: read the error, fix the root cause, re-run. Repeat up to 5 times autonomously.
+6. **REPORT** — Only surface to me after the task is fully complete or you have exhausted retries with a clear diagnosis.
+
+## MCP Usage Policy
+- **GitHub MCP**: Use proactively to read issues, check PR diffs, read repo file tree, check CI status. Never ask me "should I check the issue?" — just check it.
+- **Playwright MCP**: Use to run and validate browser-based tests. If a UI change is made, run Playwright assertions automatically.
+- Do not ask me for information that either MCP can supply.
+
+## Git Discipline
+- Commits must follow Conventional Commits: `feat:`, `fix:`, `docs:`, `test:`, `refactor:`, `chore:`.
+- Never commit to `main` or `master` directly. Always use a feature branch.
+- Keep commits atomic — one logical change per commit.
+- Before opening a PR, run all tests and confirm they pass.

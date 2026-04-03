@@ -6,7 +6,10 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'AI-powered performance engineering — JMeter plugins and insights from PerfSage.' } = Astro.props;
+const {
+  title,
+  description = 'AI-powered performance engineering — JMeter plugins and insights from PerfSage.',
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -16,8 +19,161 @@ const { title, description = 'AI-powered performance engineering — JMeter plug
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Inline theme init — runs before paint to prevent flash -->
+    <script is:inline>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var saved = localStorage.getItem('ps-theme');
+          var dark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)').matches : true;
+          var theme = saved || (dark ? 'dark' : 'light');
+          root.dataset.theme = theme;
+          root.style.colorScheme = theme;
+        } catch (_) {}
+      })();
+    </script>
   </head>
+
   <body>
     <slot />
+
+    <script is:inline>
+      (function () {
+        var pfx = window.matchMedia;
+        var rm = pfx && pfx('(prefers-reduced-motion: reduce)').matches;
+
+        /* ── Theme toggle ───────────────────────────────────────── */
+        var root = document.documentElement;
+        function applyThemeIcon() {
+          var btn = document.querySelector('[data-theme-toggle]');
+          if (!btn) return;
+          var t = root.dataset.theme || 'dark';
+          btn.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
+        }
+        applyThemeIcon();
+        document.addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-theme-toggle]');
+          if (!btn) return;
+          var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = next;
+          root.style.colorScheme = next;
+          try { localStorage.setItem('ps-theme', next); } catch (_) {}
+          applyThemeIcon();
+        });
+
+        /* ── DOMContentLoaded work ──────────────────────────────── */
+        function onReady() {
+          document.body.classList.add('page-ready');
+
+          /* Counter animation */
+          var counters = Array.prototype.slice.call(document.querySelectorAll('[data-counter]'));
+          if (counters.length) {
+            if (rm) {
+              counters.forEach(function (el) {
+                var mode = el.dataset.mode || '';
+                if (mode === 'infinity') { el.textContent = '\u221e'; return; }
+                var t = Number(el.dataset.target || '0');
+                var s = el.dataset.suffix || '';
+                var p = el.dataset.prefix || '';
+                var fmt = el.dataset.format || '';
+                if (fmt === 'compact') {
+                  el.textContent = p + new Intl.NumberFormat(void 0, { notation: 'compact', maximumFractionDigits: 1 }).format(t) + s;
+                } else {
+                  el.textContent = p + t + s;
+                }
+              });
+            } else {
+              var start = performance.now();
+              var dur = 1200;
+              function tick(now) {
+                var progress = Math.min(1, (now - start) / dur);
+                counters.forEach(function (el) {
+                  var mode = el.dataset.mode || '';
+                  var target = Number(el.dataset.target || '0');
+                  if (mode === 'infinity') {
+                    el.textContent = progress >= 0.98 ? '\u221e' : String(Math.round(target * progress));
+                    return;
+                  }
+                  var val = Math.round(target * progress);
+                  var suf = el.dataset.suffix || '';
+                  var pre = el.dataset.prefix || '';
+                  var f = el.dataset.format || '';
+                  if (f === 'compact') {
+                    el.textContent = pre + new Intl.NumberFormat(void 0, { notation: 'compact', maximumFractionDigits: 1 }).format(val) + suf;
+                  } else {
+                    el.textContent = pre + val + suf;
+                  }
+                });
+                if (progress < 1) requestAnimationFrame(tick);
+              }
+              requestAnimationFrame(tick);
+            }
+          }
+
+          /* Scroll reveal */
+          var revealEls = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+          if (revealEls.length) {
+            if (rm) {
+              revealEls.forEach(function (el) { el.classList.add('reveal-in'); });
+            } else {
+              var ro = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                  if (!entry.isIntersecting) return;
+                  entry.target.classList.add('reveal-in');
+                  ro.unobserve(entry.target);
+                });
+              }, { threshold: 0.1 });
+              revealEls.forEach(function (el) { ro.observe(el); });
+            }
+          }
+
+          /* Skill bars */
+          var bars = Array.prototype.slice.call(document.querySelectorAll('[data-skillbar]'));
+          if (bars.length) {
+            var so = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                var el = entry.target;
+                var bar = el.querySelector('[data-skillbar-bar]');
+                var pct = Number(el.dataset.progress || '0');
+                if (bar) bar.style.width = pct + '%';
+                so.unobserve(el);
+              });
+            }, { threshold: 0.25 });
+            bars.forEach(function (el) { so.observe(el); });
+          }
+
+          /* Page transition on internal links */
+          if (!rm) {
+            Array.prototype.slice.call(document.querySelectorAll('a')).forEach(function (a) {
+              var href = a.getAttribute('href') || '';
+              if (!href.startsWith('/')) return;
+              if (href.startsWith('#')) return;
+              if (a.target === '_blank') return;
+              if (a.getAttribute('aria-current') === 'page') return;
+              a.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                document.body.classList.add('is-navigating');
+                setTimeout(function () { window.location.href = href; }, 200);
+              });
+            });
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', onReady);
+        } else {
+          onReady();
+        }
+      })();
+    </script>
   </body>
 </html>

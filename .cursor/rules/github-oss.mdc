@@ -1,0 +1,27 @@
+---
+description: GitHub OSS contribution workflow — auto-attached when working with issues, PRs, or GitHub API
+globs: ["**/*.md", "**/.github/**", "**/CONTRIBUTING*", "**/CHANGELOG*"]
+---
+
+# GitHub OSS Workflow
+
+## Before Starting Any Task
+1. Use GitHub MCP to fetch the issue or PR details — read the full description, comments, and linked issues.
+2. Check if a related PR already exists. If so, read its diff before writing new code.
+3. Check if the repo has a `CONTRIBUTING.md` — follow its standards exactly.
+
+## Branch Strategy
+- Branch name format: `fix/issue-{number}-short-description` or `feat/issue-{number}-short-description`
+- Always branch from the default branch (usually `main` or `develop`).
+
+## PR Checklist (auto-verify before surfacing to user)
+- [ ] All existing tests pass
+- [ ] New functionality has test coverage consistent with repo's testing strategy
+- [ ] Commits follow Conventional Commits format
+- [ ] PR description references the issue number with `Closes #N`
+- [ ] No debug logs, console.log, or print statements left in code
+- [ ] Linter and formatter pass
+
+## Interacting with Issues via GitHub MCP
+- Add a comment to the issue when starting work: "Working on a fix for this."
+- Reference specific code lines when asking maintainer questions.

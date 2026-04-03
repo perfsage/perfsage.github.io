@@ -1,0 +1,376 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout
+  title="About — PerfSage"
+  description="Meet Aashish Bajpai: performance engineering, reliability, and mentorship at enterprise scale."
+>
+  <SiteNav />
+
+  <main>
+    <!-- Hero -->
+    <header class="about-hero">
+      <div class="container about-grid">
+        <div class="avatar-card" data-reveal>
+          <svg
+            width="150"
+            height="150"
+            viewBox="0 0 160 160"
+            role="img"
+            aria-label="Aashish Bajpai avatar"
+            class="avatar-ab"
+          >
+            <defs>
+              <linearGradient id="g-ab" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#7c6af7" stop-opacity="0.95"></stop>
+                <stop offset="1" stop-color="#00d4aa" stop-opacity="0.9"></stop>
+              </linearGradient>
+            </defs>
+            <circle cx="80" cy="80" r="72" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.35)" stroke-width="3"
+            ></circle>
+            <circle cx="80" cy="80" r="62" fill="url(#g-ab)" opacity="0.22"></circle>
+            <text
+              x="80"
+              y="95"
+              text-anchor="middle"
+              font-family="JetBrains Mono, ui-monospace, monospace"
+              font-size="48"
+              font-weight="700"
+              fill="currentColor">AB</text
+            >
+          </svg>
+        </div>
+
+        <div data-reveal>
+          <div class="badge">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Senior Performance Engineer
+          </div>
+          <p class="role-title">SRE &middot; DevPerfOps &middot; Lucknow, India</p>
+          <h1 style="margin-top: 14px;">Aashish Bajpai</h1>
+          <p class="about-tagline">
+            Works with enterprise clients on performance &amp; reliability &mdash; turning test signals into SLO-grade
+            confidence.
+          </p>
+          <div class="cta-row">
+            <a
+              class="btn btn-primary"
+              href="https://thinkbits.org"
+              target="_blank"
+              rel="noopener noreferrer">Blog / Resume &#10142;</a
+            >
+            <a class="btn btn-outline" href="/contact/">Contact Me</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Story -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>My Story</h2>
+        <div class="story">
+          <div class="card" data-reveal>
+            <p class="section-subtitle" style="margin-top: 0;">
+              I started my career in development, and over time I moved deeper into performance engineering &mdash;
+              where the real work becomes reliability at scale. I&rsquo;m passionate about making systems dependable
+              under load, because users don&rsquo;t care how &ldquo;nice&rdquo; your architecture is &mdash; they care
+              that it keeps working.
+              <br /><br />
+              At <strong>PerfSage</strong>, I build open-source tools and patterns that make performance engineering
+              faster to execute and easier to understand. I also write at
+              <a href="https://thinkbits.org" target="_blank" rel="noopener noreferrer" class="inline-link"
+                >thinkbits.org</a
+              >, sharing practical insights and battle-tested lessons from the field.
+            </p>
+          </div>
+
+          <div class="card" data-reveal>
+            <h3 class="card-heading">Key Stats</h3>
+            <div class="stats" style="margin-top: 14px;">
+              <div class="stat-card">
+                <div class="stat-number" data-counter data-target="8" data-suffix="+" data-mode="normal">0</div>
+                <div class="stat-label">Years XP</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-counter data-target="12" data-suffix="+" data-mode="normal">0</div>
+                <div class="stat-label">Tools Mastered</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-counter data-target="50" data-suffix="+" data-mode="normal">0</div>
+                <div class="stat-label">Clients</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-counter data-target="1" data-mode="infinity">0</div>
+                <div class="stat-label">Incidents Learned</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Technical Skills</h2>
+        <p class="section-subtitle" data-reveal>Scroll-animated skill bars — filled on view.</p>
+
+        <div class="card skill-card" style="margin-top: 20px;">
+          <div class="skill-row" data-skillbar data-progress="95" data-reveal>
+            <div class="skill-head"><span>Apache JMeter</span><span>95%</span></div>
+            <div class="progress"><div class="progress__bar" data-skillbar-bar></div></div>
+          </div>
+          <div class="skill-row" data-skillbar data-progress="92" data-reveal>
+            <div class="skill-head"><span>API Performance Testing</span><span>92%</span></div>
+            <div class="progress"><div class="progress__bar" data-skillbar-bar></div></div>
+          </div>
+          <div class="skill-row" data-skillbar data-progress="90" data-reveal>
+            <div class="skill-head"><span>SRE / SLO / SLI Engineering</span><span>90%</span></div>
+            <div class="progress"><div class="progress__bar" data-skillbar-bar></div></div>
+          </div>
+          <div class="skill-row" data-skillbar data-progress="88" data-reveal>
+            <div class="skill-head"><span>Python (Locust / scripting)</span><span>88%</span></div>
+            <div class="progress"><div class="progress__bar" data-skillbar-bar></div></div>
+          </div>
+          <div class="skill-row" data-skillbar data-progress="85" data-reveal>
+            <div class="skill-head"><span>Kubernetes &amp; Container Orchestration</span><span>85%</span></div>
+            <div class="progress"><div class="progress__bar" data-skillbar-bar></div></div>
+          </div>
+          <div class="skill-row" data-skillbar data-progress="82" data-reveal>
+            <div class="skill-head"><span>PostgreSQL Performance &amp; Resilience</span><span>82%</span></div>
+            <div class="progress"><div class="progress__bar" data-skillbar-bar></div></div>
+          </div>
+          <div class="skill-row" data-skillbar data-progress="80" data-reveal>
+            <div class="skill-head"><span>Chaos Engineering &amp; Fault Injection</span><span>80%</span></div>
+            <div class="progress"><div class="progress__bar" data-skillbar-bar></div></div>
+          </div>
+          <div class="skill-row" data-skillbar data-progress="78" data-reveal>
+            <div class="skill-head"><span>eBPF &amp; Kernel Tracing</span><span>78%</span></div>
+            <div class="progress"><div class="progress__bar" data-skillbar-bar></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Experience Timeline</h2>
+
+        <div class="timeline card" style="padding: 10px 18px;" data-reveal>
+          <div class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true">&#9733;</div>
+            <div>
+              <h3>Senior Performance Engineer &mdash; Current</h3>
+              <p>
+                Enterprise-level performance &amp; reliability engagements with SLO-based delivery and observability
+                focus.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true">&#9670;</div>
+            <div>
+              <h3>Performance Engineer</h3>
+              <p>
+                Designing load tests, improving capacity planning, and building repeatable analysis workflows across
+                distributed systems.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true">&#9679;</div>
+            <div>
+              <h3>Software Developer</h3>
+              <p>
+                Building systems and learning first-hand how performance failure actually manifests in production
+                applications.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recognition -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Certifications &amp; Recognition</h2>
+
+        <div class="tools-wrap" style="margin-top: 20px;">
+          <div class="card" data-reveal>
+            <h3 class="card-heading">Topmate Mentor</h3>
+            <p class="section-subtitle" style="margin-top: 10px;">
+              Available for 1:1 mentorship and coaching in performance engineering.
+            </p>
+            <a
+              class="btn btn-outline"
+              href="https://topmate.io/abajpai/659595"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="margin-top: 14px; display: inline-flex;">View Topmate &#10142;</a
+            >
+          </div>
+
+          <div class="card" data-reveal>
+            <h3 class="card-heading">Open Source &amp; Blogging</h3>
+            <p class="section-subtitle" style="margin-top: 10px;">
+              Building open-source reliability tooling and writing practical guides at
+              <a href="https://thinkbits.org" target="_blank" rel="noopener noreferrer" class="inline-link"
+                >thinkbits.org</a
+              >.
+            </p>
+            <div class="cta-row" style="margin-top: 16px;">
+              <a
+                class="btn btn-outline"
+                href="https://github.com/perfsage"
+                target="_blank"
+                rel="noopener noreferrer">GitHub &#10142;</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools I Use -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Tools I Use</h2>
+
+        <div class="tool-grid" data-reveal>
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs
+                ><linearGradient id="g-jm" x1="0" y1="0" x2="1" y2="1"
+                  ><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop
+                ></linearGradient></defs
+              >
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"
+              ></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-jm)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">JM</text>
+            </svg>
+            <div><b>JMeter</b><div class="tiny-muted">Load Testing</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-py" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-py)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">Py</text>
+            </svg>
+            <div><b>Python</b><div class="tiny-muted">Locust / Scripts</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-k6" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-k6)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">k6</text>
+            </svg>
+            <div><b>k6</b><div class="tiny-muted">Load Testing</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-k8" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-k8)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">K8</text>
+            </svg>
+            <div><b>Kubernetes</b><div class="tiny-muted">Orchestration</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-dk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-dk)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">Dk</text>
+            </svg>
+            <div><b>Docker</b><div class="tiny-muted">Containers</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-pg)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">PG</text>
+            </svg>
+            <div><b>PostgreSQL</b><div class="tiny-muted">Resilience</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-eb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-eb)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">eB</text>
+            </svg>
+            <div><b>eBPF</b><div class="tiny-muted">Kernel Tracing</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-gf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-gf)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">GF</text>
+            </svg>
+            <div><b>Grafana</b><div class="tiny-muted">Dashboards</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-pr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-pr)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">Pr</text>
+            </svg>
+            <div><b>Prometheus</b><div class="tiny-muted">Metrics</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-gi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-gi)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">Gi</text>
+            </svg>
+            <div><b>Git</b><div class="tiny-muted">Version Control</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-li" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-li)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">Li</text>
+            </svg>
+            <div><b>Linux</b><div class="tiny-muted">Systems</div></div>
+          </div>
+
+          <div class="tool-tile">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs><linearGradient id="g-lo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6af7"></stop><stop offset="1" stop-color="#00d4aa"></stop></linearGradient></defs>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.3)"></rect>
+              <rect x="8" y="8" width="48" height="48" rx="16" fill="url(#g-lo)" opacity="0.2"></rect>
+              <text x="32" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="800" fill="currentColor">Lo</text>
+            </svg>
+            <div><b>Locust</b><div class="tiny-muted">Load Testing</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

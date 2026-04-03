@@ -1,0 +1,26 @@
+---
+description: Playwright end-to-end testing — auto-attached for test files and spec changes
+globs: ["**/*.spec.ts", "**/*.spec.js", "**/playwright.config.*", "**/tests/**"]
+---
+
+# Playwright Testing Protocol
+
+## Test-First Debugging Loop
+When a Playwright test fails:
+1. Read the full error output — note the selector, URL, and step that failed.
+2. Use Playwright MCP to inspect the live DOM/element state if needed.
+3. Fix the underlying issue (not the test assertion, unless the assertion is wrong).
+4. Re-run the specific failing test: `npx playwright test --grep "test name"`.
+5. Only run the full suite once the targeted test passes.
+6. Repeat up to 5 iterations before surfacing to the user.
+
+## Writing New Tests
+- Mirror existing test patterns in the repo — naming, structure, selectors.
+- Use `data-testid` attributes for selectors, not CSS classes or text content.
+- Each test must be independent — no shared state between tests.
+- No `page.waitForTimeout()` — use `page.waitForSelector()` or `expect(locator).toBeVisible()`.
+
+## Running Tests Efficiently
+- Use `--project=chromium` for fast iteration during debugging.
+- Use `--headed` flag only when visually debugging a selector issue.
+- Always run `npx playwright test --reporter=list` for readable terminal output.

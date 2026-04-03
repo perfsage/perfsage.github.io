@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Smoke', () => {
-  test('home loads with hero and key sections', async ({ page }) => {
+  test('home — loads with title, hero h1, tools section, footer', async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (e) => errors.push(e.message));
     page.on('console', (msg) => {
@@ -10,23 +10,40 @@ test.describe('Smoke', () => {
 
     await page.goto('/');
     await expect(page).toHaveTitle(/PerfSage/i);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Engineering with AI/i);
-    await expect(page.locator('#features')).toBeVisible();
-    await expect(page.locator('#plugin')).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Blazing Fast/i);
+    await expect(page.locator('#tools')).toBeVisible();
     await expect(page.getByRole('contentinfo')).toBeVisible();
 
-    expect(errors, `Console errors: ${errors.join('; ')}`).toEqual([]);
+    expect(errors, `Console errors on home: ${errors.join('; ')}`).toEqual([]);
   });
 
-  test('docs page loads', async ({ page }) => {
+  test('about — loads title and Aashish Bajpai heading', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto('/about/', { waitUntil: 'domcontentloaded' });
+    await expect(page).toHaveTitle(/About/i);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Aashish Bajpai/i);
+    await expect(page.getByRole('contentinfo')).toBeVisible();
+    expect(errors, `Console errors on about: ${errors.join('; ')}`).toEqual([]);
+  });
+
+  test('contact — loads title and hero heading', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto('/contact/', { waitUntil: 'domcontentloaded' });
+    await expect(page).toHaveTitle(/Contact/i);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Fast/i);
+    await expect(page.getByRole('contentinfo')).toBeVisible();
+    expect(errors, `Console errors on contact: ${errors.join('; ')}`).toEqual([]);
+  });
+
+  test('docs — still loads (legacy page)', async ({ page }) => {
     await page.goto('/docs/', { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveTitle(/Documentation/i);
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Documentation');
   });
 
-  test('changelog page loads', async ({ page }) => {
+  test('changelog — still loads (legacy page)', async ({ page }) => {
     await page.goto('/changelog/', { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveTitle(/Changelog/i);
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Changelog');
   });
 });

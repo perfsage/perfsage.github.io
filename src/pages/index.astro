@@ -1,18 +1,220 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteNav from '../components/SiteNav.astro';
-import Hero from '../components/Hero.astro';
-import FeaturesGrid from '../components/FeaturesGrid.astro';
-import PluginSection from '../components/PluginSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 ---
 
-<BaseLayout title="PerfSage - AI-Powered Performance Engineering">
-  <div class="gradient-bg">
-    <SiteNav variant="home" />
-    <Hero />
-    <FeaturesGrid />
-    <PluginSection />
-    <SiteFooter />
-  </div>
+<BaseLayout
+  title="PerfSage — Make Systems Blazing Fast"
+  description="AI-powered JMeter insights, SRE reliability patterns, and open-source performance engineering tools."
+>
+  <SiteNav />
+
+  <!-- ── Hero ─────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="badge" data-reveal>
+        <span class="pulse-dot" aria-hidden="true"></span>
+        Performance Engineering, Reinvented
+      </div>
+
+      <h1 data-reveal>
+        Make Systems <span class="gradient-text">Blazing Fast</span>
+      </h1>
+
+      <p class="hero-subtitle" data-reveal>
+        AI tools for test insights, open-source JMeter plugins, and SRE-grade reliability thinking—so performance,
+        availability, and observability work together in the real world.
+      </p>
+
+      <div class="cta-row" data-reveal>
+        <a class="btn btn-primary" href="#tools">Explore Tools &#10142;</a>
+        <a class="btn btn-outline" href="/about/">Meet Aashish</a>
+      </div>
+
+      <div class="stats" data-reveal>
+        <div class="stat-card">
+          <div class="stat-number" data-counter data-target="8" data-suffix="+" data-mode="normal">0</div>
+          <div class="stat-label">Years XP</div>
+        </div>
+        <div class="stat-card">
+          <div
+            class="stat-number"
+            data-counter
+            data-target="1000000"
+            data-format="compact"
+            data-suffix="+"
+            data-mode="normal"
+          >
+            0
+          </div>
+          <div class="stat-label">RPS Handled</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-counter data-target="50" data-suffix="+" data-mode="normal">0</div>
+          <div class="stat-label">Clients</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-counter data-target="1" data-mode="infinity">0</div>
+          <div class="stat-label">Incidents Learned</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ticker -->
+    <div class="ticker" aria-label="Skills ticker" data-reveal>
+      <div class="ticker__inner" aria-hidden="true">
+        <span class="ticker-item">Performance Engineering &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">SRE &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">JMeter &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">eBPF &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">Kubernetes &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">Chaos Engineering &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">AI Analysis &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">Capacity Planning &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">SLO/SLI &nbsp;&middot;&nbsp;</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="ticker-item">Performance Engineering &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">SRE &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">JMeter &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">eBPF &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">Kubernetes &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">Chaos Engineering &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">AI Analysis &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">Capacity Planning &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">SLO/SLI &nbsp;&middot;&nbsp;</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main ─────────────────────────────────────────────── -->
+  <main>
+    <!-- Features -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>What PerfSage Helps You Build</h2>
+        <p class="section-subtitle" data-reveal>
+          Premium performance engineering, delivered like a modern dev-tool — fast, observable, and resilient.
+        </p>
+
+        <div class="feature-grid">
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128268;</div>
+              <h3>Open Source JMeter Plugins</h3>
+            </div>
+            <p>Production-tested extensions to supercharge load testing workflows.</p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#129302;</div>
+              <h3>AI-Powered Test Insights</h3>
+            </div>
+            <p>Automatic interpretation of results with actionable anomaly signals.</p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128200;</div>
+              <h3>SRE &amp; Observability</h3>
+            </div>
+            <p>SLO thinking, telemetry clarity, and reliability engineering you can trust.</p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#129544;</div>
+              <h3>Chaos Engineering</h3>
+            </div>
+            <p>Fault injection strategies that build real confidence in failure modes.</p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128221;</div>
+              <h3>Engineering Blog</h3>
+            </div>
+            <p>
+              Deep guides on performance analysis, percentiles, and reliability patterns at
+              <a href="https://thinkbits.org" target="_blank" rel="noopener noreferrer" class="inline-link"
+                >thinkbits.org</a
+              >.
+            </p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#127885;</div>
+              <h3>Mentorship &amp; Coaching</h3>
+            </div>
+            <p>
+              1:1 support for performance engineering teams via
+              <a href="https://topmate.io/abajpai/659595" target="_blank" rel="noopener noreferrer" class="inline-link"
+                >Topmate</a
+              >.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools (Code Demo) -->
+    <section class="section" id="tools">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Taste the API</h2>
+        <p class="section-subtitle" data-reveal>
+          Script SLO-aware analysis with PerfSage-style Python — from raw JTL to actionable report in seconds.
+        </p>
+
+        <div class="tools-wrap">
+          <div class="card" data-reveal>
+            <h3 class="card-heading">From raw data to decisions</h3>
+            <p class="section-subtitle" style="margin-top: 10px;">
+              Start with test results, detect anomalies, and export a structured report you can plug into your
+              performance engineering pipeline.
+            </p>
+            <div class="cta-row" style="margin-top: 18px;">
+              <a class="btn btn-primary" href="https://github.com/perfsage" target="_blank" rel="noopener noreferrer">
+                View on GitHub &#10142;
+              </a>
+            </div>
+          </div>
+
+          <div class="code-block" data-reveal aria-label="Python code demo">
+            <pre><code><span class="tok-kw">from</span> <span class="tok-module">perfsage</span> <span class="tok-kw">import</span> <span class="tok-name">SLOReporter</span>
+
+<span class="tok-name">reporter</span> <span class="tok-op">=</span> <span class="tok-fn">SLOReporter</span><span class="tok-op">(</span>
+  <span class="tok-name">slo_config</span><span class="tok-op">=</span><span class="tok-str">"slo.properties"</span><span class="tok-op">,</span>
+  <span class="tok-name">anomaly_mode</span><span class="tok-op">=</span><span class="tok-str">"fast-local"</span>
+<span class="tok-op">)</span>
+
+<span class="tok-name">report</span> <span class="tok-op">=</span> <span class="tok-name">reporter</span><span class="tok-op">.</span><span class="tok-fn">analyze</span><span class="tok-op">(</span><span class="tok-str">"results.jtl"</span><span class="tok-op">)</span>
+<span class="tok-name">reporter</span><span class="tok-op">.</span><span class="tok-fn">export_html</span><span class="tok-op">(</span><span class="tok-str">"report/"</span><span class="tok-op">)</span>
+
+<span class="tok-kw">print</span><span class="tok-op">(</span><span class="tok-str">f"SLO compliance: </span><span class="tok-op">{</span><span class="tok-name">report</span><span class="tok-op">.</span><span class="tok-name">slo_pct</span><span class="tok-op">}</span><span class="tok-str">%"</span><span class="tok-op">)</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-panel" data-reveal>
+          <h2>Ready to Make Your Systems Unbreakable?</h2>
+          <p>
+            Explore open-source tools, request a mentorship session, or start an SLO/observability-focused reliability
+            engagement.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="/contact/">Contact &#10142;</a>
+            <a class="btn btn-outline" href="/about/">Meet Aashish</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
 </BaseLayout>

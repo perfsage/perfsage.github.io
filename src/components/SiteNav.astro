@@ -1,21 +1,67 @@
 ---
-interface Props {
-  variant?: 'home' | 'inner';
-}
+// Active state is derived from the current route so the same nav works on all pages.
+const pathname = (Astro.url.pathname || '/').replace(/\/+$/, ''); // normalize
 
-const { variant = 'inner' } = Astro.props;
-const logoClass = variant === 'home' ? 'logo' : 'logo logo-compact';
+const isHome = pathname === '' || pathname === '/';
+const isAbout = pathname === '/about';
+const isContact = pathname === '/contact';
+
+const linkClass = (isActive: boolean) =>
+  ['nav-link', isActive ? 'nav-link--active' : ''].filter(Boolean).join(' ');
 ---
 
 <nav class="site-nav" aria-label="Primary">
-  <a href="/" class:list={[logoClass]}>
-    {variant === 'home' && <span class="logo-icon" aria-hidden="true">⚡</span>}
-    PerfSage
+  <a href="/" class="logo" aria-label="PerfSage Home">
+    <span class="logo-icon" aria-hidden="true">⚡</span>
+    <span class="logo-text">PerfSage</span>
   </a>
-  <div class="nav-links">
-    <a class="nav-link" href="/">Home</a>
-    <a class="nav-link" href="/docs/">Docs</a>
-    <a class="nav-link" href="/changelog/">Changelog</a>
-    <a class="nav-link" href="https://github.com/perfsage" target="_blank" rel="noopener noreferrer">GitHub</a>
+
+  <div class="nav-links" role="navigation" aria-label="Main">
+    <a class={linkClass(isHome)} href="/" aria-current={isHome ? 'page' : undefined}>
+      Home
+    </a>
+    <a class={linkClass(isAbout)} href="/about/" aria-current={isAbout ? 'page' : undefined}>
+      About
+    </a>
+    <a class={linkClass(isContact)} href="/contact/" aria-current={isContact ? 'page' : undefined}>
+      Contact
+    </a>
+    <a
+      class="nav-link"
+      href="https://github.com/perfsage"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="PerfSage GitHub (opens in new tab)"
+    >
+      GitHub
+    </a>
   </div>
+
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light/dark theme" title="Toggle theme">
+    <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"
+          stroke="currentColor"
+          stroke-width="2"
+        />
+        <path
+          d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+    </span>
+    <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M21 13.2A8.5 8.5 0 0 1 10.8 3a6.9 6.9 0 1 0 10.2 10.2Z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </span>
+  </button>
 </nav>

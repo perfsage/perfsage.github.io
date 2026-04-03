@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout
+  title="Contact — PerfSage"
+  description="Contact Aashish Bajpai for consulting, mentorship, and open-source reliability engagements."
+>
+  <SiteNav />
+
+  <main>
+    <header class="hero">
+      <div class="container hero-inner">
+        <div class="badge" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Let&rsquo;s Connect
+        </div>
+        <h1 data-reveal>
+          Let&rsquo;s Build Something <span class="gradient-text">Fast</span> Together
+        </h1>
+        <p class="hero-subtitle" data-reveal>
+          Reach out for performance consulting, mentorship, open-source collaboration, or reliability engineering
+          engagements.
+        </p>
+        <div class="availability" data-reveal>
+          &#x25CF;&nbsp; Currently available for consulting &amp; mentorship engagements
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Contact links -->
+          <div data-reveal>
+            <h2 class="section-title">Find Me Online</h2>
+
+            <div class="card" style="margin-top: 14px; display: grid; gap: 10px;">
+              <div class="contact-card">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <span class="contact-icon" aria-hidden="true">&#9889;</span>
+                  <strong>GitHub</strong>
+                </div>
+                <a href="https://github.com/perfsage" target="_blank" rel="noopener noreferrer"
+                  >github.com/perfsage</a
+                >
+              </div>
+
+              <div class="contact-card">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <span class="contact-icon" aria-hidden="true">in</span>
+                  <strong>LinkedIn</strong>
+                </div>
+                <a href="https://linkedin.com/in/aashu320" target="_blank" rel="noopener noreferrer"
+                  >linkedin.com/in/aashu320</a
+                >
+              </div>
+
+              <div class="contact-card">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <span class="contact-icon" aria-hidden="true">&#120143;</span>
+                  <strong>Twitter / X</strong>
+                </div>
+                <a href="https://x.com/aashu320" target="_blank" rel="noopener noreferrer">x.com/aashu320</a>
+              </div>
+
+              <div class="contact-card">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <span class="contact-icon" aria-hidden="true">&#9678;</span>
+                  <strong>Instagram</strong>
+                </div>
+                <a href="https://instagram.com/aashu320" target="_blank" rel="noopener noreferrer"
+                  >instagram.com/aashu320</a
+                >
+              </div>
+
+              <div class="contact-card">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <span class="contact-icon" aria-hidden="true">f</span>
+                  <strong>Facebook</strong>
+                </div>
+                <a href="https://facebook.com/aashish.bajpai.52" target="_blank" rel="noopener noreferrer"
+                  >facebook.com/aashish.bajpai.52</a
+                >
+              </div>
+
+              <div class="contact-card">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <span class="contact-icon" aria-hidden="true">&#128221;</span>
+                  <strong>Blog</strong>
+                </div>
+                <a href="https://thinkbits.org" target="_blank" rel="noopener noreferrer">thinkbits.org</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact form -->
+          <div class="card" data-reveal>
+            <h2 class="section-title">Send a Message</h2>
+            <p class="section-subtitle" style="margin-top: 8px;">
+              Visual contact form &mdash; wire to Formspree or Netlify Forms when ready for production.
+            </p>
+
+            <form
+              onsubmit="event.preventDefault();var b=this.querySelector('button[type=submit]');if(b){b.textContent='Sent \u2713';setTimeout(function(){b.textContent='Submit Message';},2500);}"
+              novalidate
+            >
+              <div class="field">
+                <label for="contact-name">Name</label>
+                <input id="contact-name" name="name" type="text" placeholder="Your name" autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="contact-email">Email</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  placeholder="you@domain.com"
+                  autocomplete="email"
+                />
+              </div>
+              <div class="field">
+                <label for="contact-subject">Subject</label>
+                <select id="contact-subject" name="subject">
+                  <option value="consulting">Consulting</option>
+                  <option value="mentorship">Mentorship</option>
+                  <option value="open_source">Open Source</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="contact-message">Message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  placeholder="Tell me what you're building and what success looks like..."></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary btn-submit" type="submit">Submit Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

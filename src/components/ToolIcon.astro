@@ -1,0 +1,37 @@
+---
+interface Props {
+  short: string;
+  label: string;
+}
+
+const { short, label } = Astro.props;
+---
+
+<div class="tool-tile" aria-label={label}>
+  <svg viewBox="0 0 64 64" role="img" aria-label={`${label} icon`}>
+    <defs>
+      <linearGradient id={`g-${short}`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#7c6af7" stop-opacity="1" />
+        <stop offset="1" stop-color="#00d4aa" stop-opacity="0.95" />
+      </linearGradient>
+    </defs>
+    <rect x="8" y="8" width="48" height="48" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(124,106,247,0.35)" />
+    <rect x="8" y="8" width="48" height="48" rx="18" fill={`url(#g-${short})`} opacity="0.18" />
+    <text
+      x="32"
+      y="40"
+      text-anchor="middle"
+      font-family="JetBrains Mono, ui-monospace, monospace"
+      font-size="18"
+      font-weight="800"
+      fill="currentColor"
+    >
+      {short}
+    </text>
+  </svg>
+  <div>
+    <b>{label}</b>
+    <div class="tiny-muted">{short}</div>
+  </div>
+</div>
+
