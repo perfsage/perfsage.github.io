@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const slug = (id: string) => id.replace(/\.mdx?$/, '');
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Blog — PerfSage"
+  description="Performance engineering insights, reliability patterns, and SRE lessons from the field. By Aashish Bajpai."
+>
+  <SiteNav />
+
+  <main>
+    <header class="hero">
+      <div class="container hero-inner">
+        <div class="badge" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Field Notes
+        </div>
+        <h1 data-reveal>
+          The <span class="gradient-text">PerfSage</span> Blog
+        </h1>
+        <p class="hero-subtitle" data-reveal>
+          Practical performance engineering — SLOs, reliability patterns, JMeter deep dives, and lessons from real
+          incidents. No fluff.
+        </p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+
+        {allPosts.length === 0 ? (
+          <div class="card" style="text-align:center;padding:48px;">
+            <p class="section-subtitle">No posts yet — check back soon.</p>
+          </div>
+        ) : (
+          <>
+            <p class="blog-count section-subtitle" data-reveal>
+              {allPosts.length} {allPosts.length === 1 ? 'post' : 'posts'}
+            </p>
+            <div class="blog-grid">
+              {allPosts.map((post) => (
+                <a href={'/blog/' + slug(post.id) + '/'} class="blog-card" data-reveal>
+                  <div class="blog-card__top">
+                    <div class="blog-tag-row">
+                      {post.data.tags.slice(0, 3).map((tag) => (
+                        <span class="blog-tag">{tag}</span>
+                      ))}
+                    </div>
+                    <h2 class="blog-card__title">{post.data.title}</h2>
+                    <p class="blog-card__desc">{post.data.description}</p>
+                  </div>
+                  <div class="blog-card__foot">
+                    <span class="blog-card__author">{post.data.author}</span>
+                    <time datetime={post.data.pubDate.toISOString()} class="blog-card__date">
+                      {fmtDate(post.data.pubDate)}
+                    </time>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

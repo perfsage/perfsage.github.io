@@ -4,6 +4,7 @@ const pathname = (Astro.url.pathname || '/').replace(/\/+$/, ''); // normalize
 
 const isHome = pathname === '' || pathname === '/';
 const isAbout = pathname === '/about';
+const isBlog = pathname === '/blog' || pathname.startsWith('/blog/');
 const isContact = pathname === '/contact';
 
 const linkClass = (isActive: boolean) =>
@@ -22,6 +23,9 @@ const linkClass = (isActive: boolean) =>
     </a>
     <a class={linkClass(isAbout)} href="/about/" aria-current={isAbout ? 'page' : undefined}>
       About
+    </a>
+    <a class={linkClass(isBlog)} href="/blog/" aria-current={isBlog ? 'page' : undefined}>
+      Blog
     </a>
     <a class={linkClass(isContact)} href="/contact/" aria-current={isContact ? 'page' : undefined}>
       Contact

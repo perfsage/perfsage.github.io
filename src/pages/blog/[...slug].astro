@@ -1,0 +1,113 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.mdx?$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const readingTime = Math.max(1, Math.ceil(post.body!.split(/\s+/).length / 200));
+---
+
+<BaseLayout title={post.data.title + ' — PerfSage Blog'} description={post.data.description}>
+  <SiteNav />
+
+  <main>
+    <!-- Post header -->
+    <header class="post-hero">
+      <div class="container post-hero-inner">
+        <div class="blog-tag-row" data-reveal>
+          {post.data.tags.map((tag) => <span class="blog-tag">{tag}</span>)}
+        </div>
+
+        <h1 class="post-title" data-reveal>{post.data.title}</h1>
+        <p class="post-desc" data-reveal>{post.data.description}</p>
+
+        <div class="post-meta" data-reveal>
+          <img
+            src="/images/aashish-bajpai.png"
+            alt={post.data.author}
+            class="post-avatar"
+            width="36"
+            height="36"
+            loading="lazy"
+          />
+          <span class="post-author">{post.data.author}</span>
+          <span class="post-meta-sep" aria-hidden="true">&middot;</span>
+          <time datetime={post.data.pubDate.toISOString()}>{fmtDate(post.data.pubDate)}</time>
+          {post.data.updatedDate && (
+            <>
+              <span class="post-meta-sep" aria-hidden="true">&middot;</span>
+              <span>Updated {fmtDate(post.data.updatedDate)}</span>
+            </>
+          )}
+          <span class="post-meta-sep" aria-hidden="true">&middot;</span>
+          <span>{readingTime} min read</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post body -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="post-layout">
+          <article class="prose card" data-reveal>
+            <Content />
+          </article>
+
+          <!-- Sidebar -->
+          <aside class="post-sidebar">
+            <div class="card" style="position:sticky;top:88px;">
+              <h3 class="card-heading" style="margin-bottom:14px;">About the author</h3>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                <img
+                  src="/images/aashish-bajpai.png"
+                  alt="Aashish Bajpai"
+                  width="48"
+                  height="48"
+                  style="width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid rgba(124,106,247,0.35);"
+                  loading="lazy"
+                />
+                <div>
+                  <div style="font-weight:700;">Aashish Bajpai</div>
+                  <div class="tiny-muted">Senior Performance Engineer</div>
+                </div>
+              </div>
+              <p style="font-size:0.85rem;color:var(--muted);line-height:1.55;">
+                9+ years in performance &amp; reliability engineering — VMware, EY, Oracle and more.
+              </p>
+              <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px;">
+                <a
+                  class="btn btn-primary"
+                  href="https://topmate.io/abajpai/659595"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="text-align:center;font-size:0.85rem;padding:9px 16px;"
+                >&#128197; Book a Call</a>
+                <a
+                  class="btn btn-outline"
+                  href="/blog/"
+                  style="text-align:center;font-size:0.85rem;padding:9px 16px;"
+                >&#8592; All Posts</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

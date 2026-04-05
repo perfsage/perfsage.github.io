@@ -5,8 +5,23 @@ test.describe('Navigation', () => {
     await page.goto('/');
     await expect(page.getByRole('navigation', { name: 'Primary' })).toBeVisible();
     await expect(page.getByRole('link', { name: /About/i }).first()).toBeVisible();
+    await expect(page.getByRole('link', { name: /Blog/i }).first()).toBeVisible();
     await expect(page.getByRole('link', { name: /Contact/i }).first()).toBeVisible();
     await expect(page.getByRole('link', { name: /GitHub/i }).first()).toBeVisible();
+  });
+
+  test('blog nav link navigates to blog listing', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('link', { name: 'Blog', exact: true }).click();
+    await expect(page).toHaveURL(/\/blog\//);
+    await expect(page.locator('.blog-card').first()).toBeVisible();
+  });
+
+  test('blog post card links to post page', async ({ page }) => {
+    await page.goto('/blog/');
+    await page.locator('.blog-card').first().click();
+    await expect(page).toHaveURL(/\/blog\/.+\//);
+    await expect(page.locator('.prose')).toBeVisible();
   });
 
   test('about nav link navigates to about page', async ({ page }) => {

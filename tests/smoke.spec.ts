@@ -38,6 +38,32 @@ test.describe('Smoke', () => {
     expect(errors, `Console errors on contact: ${errors.join('; ')}`).toEqual([]);
   });
 
+  test('blog index — loads with heading and at least one post card', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto('/blog/', { waitUntil: 'domcontentloaded' });
+    await expect(page).toHaveTitle(/Blog.*PerfSage/i);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Blog/i);
+    await expect(page.locator('.blog-card').first()).toBeVisible();
+    expect(errors, `Console errors on blog index: ${errors.join('; ')}`).toEqual([]);
+  });
+
+  test('blog post — loads with title and prose content', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto('/blog/public-api-bakeoff-with-perfsage-slo-reporter/', { waitUntil: 'domcontentloaded' });
+    await expect(page).toHaveTitle(/JMeter.*SLOs|SLOs.*JMeter|PerfSage Blog/i);
+    await expect(page.locator('.prose')).toBeVisible();
+    await expect(page.getByRole('contentinfo')).toBeVisible();
+    expect(errors, `Console errors on blog post: ${errors.join('; ')}`).toEqual([]);
+  });
+
+  test('home — recent posts section is visible', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByText('From the Blog')).toBeVisible();
+    await expect(page.locator('.blog-grid .blog-card').first()).toBeVisible();
+  });
+
   test('docs — still loads (legacy page)', async ({ page }) => {
     await page.goto('/docs/', { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveTitle(/Documentation/i);
