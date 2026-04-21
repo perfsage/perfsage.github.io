@@ -1,0 +1,248 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const faqs = [
+  {
+    q: 'What is the PerfSage SLO Reporter plugin?',
+    a: 'It is an open-source JMeter plugin that reads your test results (JTL files) and automatically generates SLO-aware HTML reports with AI-powered anomaly detection — no manual data crunching required.',
+  },
+  {
+    q: 'Does it work with existing JMeter scripts?',
+    a: 'Yes. The plugin is a drop-in listener. Add it to any existing JMeter test plan and it will capture results in real time without modifying your scripts.',
+  },
+  {
+    q: 'What SLO thresholds does it support?',
+    a: 'You define SLO targets (p95, p99 latency, error rate, throughput) in a simple `slo.properties` file. The reporter evaluates each transaction against those targets and flags violations.',
+  },
+  {
+    q: 'Can I use it in CI/CD pipelines?',
+    a: 'Absolutely. The Python API (`SLOReporter`) is designed for headless, non-interactive use. Integrate it in Jenkins, GitHub Actions, or any CI tool to fail builds on SLO breaches.',
+  },
+  {
+    q: 'Is it free?',
+    a: 'Yes — 100% free and open-source under an Apache-compatible license. Enterprise support and custom integrations are available via the mentorship/consulting offering.',
+  },
+];
+
+const pageSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'PerfSage SLO Reporter',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Linux, macOS, Windows',
+    description: 'Open-source JMeter plugin for SLO-aware performance reporting with AI anomaly detection.',
+    url: 'https://perfsage.com/slo-plugin/',
+    downloadUrl: 'https://github.com/perfsage',
+    author: {
+      '@type': 'Person',
+      name: 'Aashish Bajpai',
+      url: 'https://perfsage.com/about/',
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="SLO Reporter JMeter Plugin — PerfSage"
+  description="Open-source JMeter plugin that generates SLO-aware HTML reports with AI anomaly detection. Free, CI/CD-ready, zero manual data crunching."
+  schema={pageSchema}
+>
+  <SiteNav />
+
+  <main>
+    <header class="hero hero--service">
+      <div class="container hero-inner">
+        <div class="badge" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Open Source JMeter Plugin
+        </div>
+        <h1 data-reveal>
+          SLO Reporter — <span class="gradient-text">JMeter Plugin</span>
+        </h1>
+        <p class="hero-subtitle" data-reveal>
+          Turn raw JTL test results into SLO-grade performance reports with AI anomaly detection. Drop it into any
+          existing JMeter test plan and get actionable insights in seconds.
+        </p>
+        <div class="cta-row" data-reveal>
+          <a class="btn btn-primary" href="https://github.com/perfsage" target="_blank" rel="noopener noreferrer">
+            View on GitHub &#10142;
+          </a>
+          <a class="btn btn-outline" href="/contact/">Request Support</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Key Features -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>What the Plugin Does</h2>
+        <p class="section-subtitle" data-reveal>
+          From raw JMeter output to SLO compliance dashboard in one command.
+        </p>
+        <div class="feature-grid">
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128200;</div>
+              <h3>SLO Compliance Reporting</h3>
+            </div>
+            <p>Define p95/p99 latency, error rate, and throughput targets. Get pass/fail per transaction automatically.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#129302;</div>
+              <h3>AI Anomaly Detection</h3>
+            </div>
+            <p>Fast-local ML models flag latency spikes and error clusters without sending data to external services.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128196;</div>
+              <h3>HTML + JSON Export</h3>
+            </div>
+            <p>Rich interactive HTML reports and structured JSON output ready for your observability dashboards.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#9881;</div>
+              <h3>CI/CD Native</h3>
+            </div>
+            <p>Python API designed for headless use — integrate with Jenkins, GitHub Actions, or any CI pipeline.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Demo -->
+    <section class="section" id="quickstart">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Quick Start</h2>
+        <div class="tools-wrap">
+          <div class="card" data-reveal>
+            <h3 class="card-heading">From JTL to report in 3 lines</h3>
+            <p class="section-subtitle" style="margin-top: 10px;">
+              Install the plugin, point it at your JTL file, and export a full SLO compliance report with anomaly highlights.
+            </p>
+          </div>
+          <div class="code-block" data-reveal aria-label="Python quick start">
+            <pre><code><span class="tok-kw">from</span> <span class="tok-module">perfsage</span> <span class="tok-kw">import</span> <span class="tok-name">SLOReporter</span>
+
+<span class="tok-name">reporter</span> <span class="tok-op">=</span> <span class="tok-fn">SLOReporter</span><span class="tok-op">(</span>
+  <span class="tok-name">slo_config</span><span class="tok-op">=</span><span class="tok-str">"slo.properties"</span><span class="tok-op">,</span>
+  <span class="tok-name">anomaly_mode</span><span class="tok-op">=</span><span class="tok-str">"fast-local"</span>
+<span class="tok-op">)</span>
+<span class="tok-name">report</span> <span class="tok-op">=</span> <span class="tok-name">reporter</span><span class="tok-op">.</span><span class="tok-fn">analyze</span><span class="tok-op">(</span><span class="tok-str">"results.jtl"</span><span class="tok-op">)</span>
+<span class="tok-name">reporter</span><span class="tok-op">.</span><span class="tok-fn">export_html</span><span class="tok-op">(</span><span class="tok-str">"report/"</span><span class="tok-op">)</span>
+<span class="tok-kw">print</span><span class="tok-op">(</span><span class="tok-str">f"SLO compliance: </span><span class="tok-op">{</span><span class="tok-name">report</span><span class="tok-op">.</span><span class="tok-name">slo_pct</span><span class="tok-op">}</span><span class="tok-str">%"</span><span class="tok-op">)</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Frequently Asked Questions</h2>
+        <div class="faq-list" data-reveal>
+          {faqs.map(({ q, a }) => (
+            <details class="faq-item">
+              <summary class="faq-question">{q}</summary>
+              <p class="faq-answer">{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-panel" data-reveal>
+          <h2>Ready to Level Up Your JMeter Reporting?</h2>
+          <p>Star the repo, try the plugin, or reach out for custom integration support.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://github.com/perfsage" target="_blank" rel="noopener noreferrer">
+              GitHub &#10142;
+            </a>
+            <a class="btn btn-outline" href="/contact/">Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .hero--service {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .faq-item {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    padding: 18px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    font-size: 0.97rem;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.3rem;
+    color: var(--primary);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  details[open] .faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 20px 18px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+</style>

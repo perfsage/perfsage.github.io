@@ -6,6 +6,11 @@ const isHome = pathname === '' || pathname === '/';
 const isAbout = pathname === '/about';
 const isBlog = pathname === '/blog' || pathname.startsWith('/blog/');
 const isContact = pathname === '/contact';
+const isTools = pathname === '/tools';
+const isServices =
+  pathname === '/slo-plugin' ||
+  pathname === '/chaos-engineering' ||
+  pathname === '/mentorship';
 
 const linkClass = (isActive: boolean) =>
   ['nav-link', isActive ? 'nav-link--active' : ''].filter(Boolean).join(' ');
@@ -13,8 +18,14 @@ const linkClass = (isActive: boolean) =>
 
 <nav class="site-nav" aria-label="Primary">
   <a href="/" class="logo" aria-label="PerfSage Home">
-    <span class="logo-icon" aria-hidden="true">⚡</span>
-    <span class="logo-text">PerfSage</span>
+    <img
+      src="/images/perfsage-logo.png"
+      alt="PerfSage"
+      class="logo-img"
+      width="120"
+      height="120"
+      loading="eager"
+    />
   </a>
 
   <div class="nav-links" role="navigation" aria-label="Main">
@@ -23,6 +34,43 @@ const linkClass = (isActive: boolean) =>
     </a>
     <a class={linkClass(isAbout)} href="/about/" aria-current={isAbout ? 'page' : undefined}>
       About
+    </a>
+
+    <!-- Services dropdown -->
+    <div class={`nav-dropdown ${isServices ? 'nav-dropdown--active' : ''}`}>
+      <button
+        class={`nav-link nav-dropdown__trigger ${isServices ? 'nav-link--active' : ''}`}
+        aria-haspopup="true"
+        aria-expanded="false"
+        data-dropdown-trigger
+        type="button"
+      >
+        Services <span class="nav-dropdown__caret" aria-hidden="true">&#9660;</span>
+      </button>
+      <ul class="nav-dropdown__menu" role="menu">
+        <li role="none">
+          <a class="nav-dropdown__item" href="/slo-plugin/" role="menuitem">
+            <span class="nav-dropdown__icon" aria-hidden="true">&#128200;</span>
+            SLO Plugin
+          </a>
+        </li>
+        <li role="none">
+          <a class="nav-dropdown__item" href="/chaos-engineering/" role="menuitem">
+            <span class="nav-dropdown__icon" aria-hidden="true">&#128030;</span>
+            Chaos Engineering
+          </a>
+        </li>
+        <li role="none">
+          <a class="nav-dropdown__item" href="/mentorship/" role="menuitem">
+            <span class="nav-dropdown__icon" aria-hidden="true">&#127891;</span>
+            Mentorship
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <a class={linkClass(isTools)} href="/tools/" aria-current={isTools ? 'page' : undefined}>
+      Tools
     </a>
     <a class={linkClass(isBlog)} href="/blog/" aria-current={isBlog ? 'page' : undefined}>
       Blog
@@ -69,3 +117,122 @@ const linkClass = (isActive: boolean) =>
     </span>
   </button>
 </nav>
+
+<script is:inline>
+  (function () {
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('[data-dropdown-trigger]');
+      var allDropdowns = document.querySelectorAll('.nav-dropdown');
+
+      if (trigger) {
+        var parent = trigger.closest('.nav-dropdown');
+        var isOpen = parent.classList.contains('is-open');
+        allDropdowns.forEach(function (d) {
+          d.classList.remove('is-open');
+          var t = d.querySelector('[data-dropdown-trigger]');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          parent.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      } else {
+        allDropdowns.forEach(function (d) {
+          d.classList.remove('is-open');
+          var t = d.querySelector('[data-dropdown-trigger]');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.nav-dropdown').forEach(function (d) {
+          d.classList.remove('is-open');
+          var t = d.querySelector('[data-dropdown-trigger]');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+  })();
+</script>
+
+<style>
+  .logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* ── Dropdown ────────────────────────────────────── */
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown__trigger {
+    background: none;
+    border: none;
+    font: inherit;
+    padding: 6px 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .nav-dropdown__caret {
+    font-size: 0.55rem;
+    transition: transform 0.2s;
+    opacity: 0.6;
+  }
+
+  .nav-dropdown.is-open .nav-dropdown__caret {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown__menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-md);
+    padding: 6px;
+    list-style: none;
+    margin: 0;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+    z-index: 100;
+  }
+
+  .nav-dropdown.is-open .nav-dropdown__menu {
+    display: block;
+  }
+
+  .nav-dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: calc(var(--radius-md) - 2px);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .nav-dropdown__item:hover {
+    background: rgba(124, 106, 247, 0.1);
+    color: var(--primary);
+  }
+
+  .nav-dropdown__icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,230 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const faqs = [
+  {
+    q: 'What is chaos engineering and why does it matter?',
+    a: 'Chaos engineering is the practice of deliberately injecting failures into a system to discover weaknesses before they cause production incidents. It builds real confidence that your systems will survive unexpected conditions.',
+  },
+  {
+    q: 'How do you approach chaos experiments safely?',
+    a: 'We follow the Principles of Chaos Engineering: define steady state, form a hypothesis, run experiments in controlled blast radius, observe, and learn. Every experiment starts small — a single instance, a single service — before expanding scope.',
+  },
+  {
+    q: 'What tools do you use for fault injection?',
+    a: 'Gremlin (for cloud infrastructure), Chaos Mesh and Litmus (for Kubernetes), and custom eBPF-based network fault injection for low-level scenarios. Tool choice depends on your stack and blast radius requirements.',
+  },
+  {
+    q: 'Can chaos engineering be integrated into CI/CD?',
+    a: 'Yes. Lightweight game days and automated resilience tests can run on every release candidate. We help define the right subset of chaos scenarios that are safe to automate versus those that need human oversight.',
+  },
+  {
+    q: 'What deliverables come out of a chaos engagement?',
+    a: 'A prioritised weakness register, runbooks for each fault class, automated chaos test scripts, and a steady-state observability baseline — so your team can repeat experiments autonomously.',
+  },
+];
+
+const pageSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Chaos Engineering Consulting',
+    description: 'Expert chaos engineering consulting: fault injection strategy, Kubernetes chaos, blast radius control, and CI/CD-integrated resilience testing.',
+    url: 'https://perfsage.com/chaos-engineering/',
+    provider: {
+      '@type': 'Person',
+      name: 'Aashish Bajpai',
+      url: 'https://perfsage.com/about/',
+    },
+    areaServed: 'Worldwide',
+    serviceType: 'Chaos Engineering & Resilience Testing',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="Chaos Engineering Consulting — PerfSage"
+  description="Expert chaos engineering: fault injection, Kubernetes chaos testing, blast radius control, and CI/CD-integrated resilience testing by a Gremlin Certified Chaos Engineer."
+  schema={pageSchema}
+>
+  <SiteNav />
+
+  <main>
+    <header class="hero hero--service">
+      <div class="container hero-inner">
+        <div class="badge" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Gremlin Certified Chaos Engineer
+        </div>
+        <h1 data-reveal>
+          Chaos Engineering — <span class="gradient-text">Build Unbreakable Systems</span>
+        </h1>
+        <p class="hero-subtitle" data-reveal>
+          Deliberately break things in a controlled environment before production does it for you. Structured fault
+          injection, blast-radius management, and CI/CD-integrated resilience testing.
+        </p>
+        <div class="cta-row" data-reveal>
+          <a class="btn btn-primary" href="https://topmate.io/abajpai/659595" target="_blank" rel="noopener noreferrer">
+            &#128197; Book a Session
+          </a>
+          <a class="btn btn-outline" href="/contact/">Get in Touch</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- What's Covered -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>What's Covered</h2>
+        <p class="section-subtitle" data-reveal>
+          From first game day to automated resilience pipelines.
+        </p>
+        <div class="feature-grid">
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128030;</div>
+              <h3>Fault Injection Design</h3>
+            </div>
+            <p>CPU throttle, memory pressure, network latency, packet loss, and kill-pod experiments tailored to your architecture.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#9878;</div>
+              <h3>Kubernetes Chaos</h3>
+            </div>
+            <p>Chaos Mesh, Litmus, and pod disruption budgets for Kubernetes multi-tenant environments — including SSO and identity platforms.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128200;</div>
+              <h3>Steady-State Baselines</h3>
+            </div>
+            <p>Define measurable steady state with Prometheus/Grafana/Datadog before any experiment so deviations are quantifiable.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128736;</div>
+              <h3>CI/CD Resilience Gates</h3>
+            </div>
+            <p>Automated chaos scenarios that run on every release candidate and fail the build if resilience regressions are detected.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128221;</div>
+              <h3>Runbooks & Playbooks</h3>
+            </div>
+            <p>Incident response runbooks for each fault class discovered during experiments — so your on-call team is never caught off guard.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#127891;</div>
+              <h3>Team Training</h3>
+            </div>
+            <p>Hands-on workshop: chaos engineering principles, GameDay facilitation, and building a culture of proactive reliability.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Frequently Asked Questions</h2>
+        <div class="faq-list" data-reveal>
+          {faqs.map(({ q, a }) => (
+            <details class="faq-item">
+              <summary class="faq-question">{q}</summary>
+              <p class="faq-answer">{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-panel" data-reveal>
+          <h2>Ready to Stress-Test Your System?</h2>
+          <p>Book a chaos engineering session or reach out to scope a full resilience engagement.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://topmate.io/abajpai/659595" target="_blank" rel="noopener noreferrer">
+              &#128197; Book a Session
+            </a>
+            <a class="btn btn-outline" href="/contact/">Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .hero--service {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .faq-item {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    padding: 18px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    font-size: 0.97rem;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.3rem;
+    color: var(--primary);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  details[open] .faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 20px 18px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+</style>

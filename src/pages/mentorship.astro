@@ -1,0 +1,243 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const faqs = [
+  {
+    q: 'Who is the mentorship designed for?',
+    a: 'Engineers at any stage who want to grow in performance engineering, SRE, or reliability. Whether you are pivoting into the field, preparing for senior/staff interviews, or scaling your impact at a new company — there is a path for you.',
+  },
+  {
+    q: 'What does a typical session look like?',
+    a: 'Sessions are 45–60 minutes on video. We focus on your specific challenge: reviewing a test strategy, debugging a performance bottleneck, designing an SLO framework, or doing mock interviews. No generic slides — just your real work.',
+  },
+  {
+    q: 'How do I book a session?',
+    a: 'Book directly on Topmate. You can choose a single session or a recurring subscription for ongoing mentorship. Slots are released weekly.',
+  },
+  {
+    q: 'Can my team get group mentorship or a workshop?',
+    a: 'Yes. Group workshops (up to 8 engineers) covering chaos engineering, JMeter advanced patterns, SLO design, or observability are available. Reach out via the contact page to scope the engagement.',
+  },
+  {
+    q: 'What is the refund policy?',
+    a: 'Sessions cancelled at least 24 hours in advance are fully refunded via Topmate. If I cancel, you are automatically refunded and given priority rebooking.',
+  },
+];
+
+const pageSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Performance Engineering & SRE Mentorship',
+    description: '1:1 mentorship sessions for performance engineers and SREs. Career coaching, technical deep-dives, and interview prep by a 9+ year veteran.',
+    url: 'https://perfsage.com/mentorship/',
+    provider: {
+      '@type': 'Person',
+      name: 'Aashish Bajpai',
+      url: 'https://perfsage.com/about/',
+    },
+    areaServed: 'Worldwide',
+    serviceType: 'Engineering Mentorship & Career Coaching',
+    offers: {
+      '@type': 'Offer',
+      url: 'https://topmate.io/abajpai/659595',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="Performance Engineering Mentorship — PerfSage"
+  description="1:1 mentorship for performance engineers and SREs. Technical deep-dives, career coaching, SLO design, and interview prep with a 9+ year industry veteran."
+  schema={pageSchema}
+>
+  <SiteNav />
+
+  <main>
+    <header class="hero hero--service">
+      <div class="container hero-inner">
+        <div class="badge" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          1:1 Engineering Mentorship
+        </div>
+        <h1 data-reveal>
+          Mentorship — <span class="gradient-text">Accelerate Your Growth</span>
+        </h1>
+        <p class="hero-subtitle" data-reveal>
+          Work directly with a 9+ year performance engineering and SRE veteran. Real-world technical guidance, career
+          strategy, and hands-on problem solving for engineers who want to level up fast.
+        </p>
+        <div class="cta-row" data-reveal>
+          <a class="btn btn-primary" href="https://topmate.io/abajpai/659595" target="_blank" rel="noopener noreferrer">
+            &#128197; Book a Session
+          </a>
+          <a class="btn btn-outline" href="/about/">Meet Aashish</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- What You Get -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>What You Get</h2>
+        <p class="section-subtitle" data-reveal>Focused, no-fluff guidance on the problems that actually matter.</p>
+        <div class="feature-grid">
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128200;</div>
+              <h3>Performance Deep-Dives</h3>
+            </div>
+            <p>Debug real bottlenecks, interpret JMeter results, design SLO frameworks, and tune JVM/infrastructure together.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#127942;</div>
+              <h3>Career Strategy</h3>
+            </div>
+            <p>Roadmaps for moving from senior to staff/principal, negotiating compensation, and building a public engineering presence.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128221;</div>
+              <h3>Interview Preparation</h3>
+            </div>
+            <p>Mock technical interviews for performance/SRE roles at top-tier companies, with detailed feedback and repeat practice.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128101;</div>
+              <h3>Team Workshops</h3>
+            </div>
+            <p>Group sessions on JMeter advanced patterns, chaos engineering, SLO design, or observability stack setup for teams up to 8.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>By the Numbers</h2>
+        <div class="stats" data-reveal>
+          <div class="stat-card">
+            <div class="stat-number" data-counter data-target="50" data-suffix="+" data-mode="normal">0</div>
+            <div class="stat-label">Engineers Mentored</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-counter data-target="9" data-suffix="+" data-mode="normal">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-counter data-target="5" data-suffix="+" data-mode="normal">0</div>
+            <div class="stat-label">Companies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-counter data-target="5" data-mode="normal">0</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Frequently Asked Questions</h2>
+        <div class="faq-list" data-reveal>
+          {faqs.map(({ q, a }) => (
+            <details class="faq-item">
+              <summary class="faq-question">{q}</summary>
+              <p class="faq-answer">{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-panel" data-reveal>
+          <h2>Ready to Accelerate Your Engineering Career?</h2>
+          <p>Book a session on Topmate and come with your hardest problem. We will get to work.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://topmate.io/abajpai/659595" target="_blank" rel="noopener noreferrer">
+              &#128197; Book on Topmate
+            </a>
+            <a class="btn btn-outline" href="/contact/">Send a Message</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .hero--service {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .faq-item {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    padding: 18px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    font-size: 0.97rem;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.3rem;
+    color: var(--primary);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  details[open] .faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 20px 18px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+</style>

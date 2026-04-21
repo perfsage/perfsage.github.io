@@ -1,0 +1,325 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const tools = [
+  {
+    icon: '&#128200;',
+    name: 'PerfSage SLO Reporter',
+    tagline: 'JMeter Plugin · Open Source',
+    description:
+      'Turn raw JTL results into SLO-aware HTML performance reports with AI anomaly detection. Drop into any JMeter test plan. Zero configuration.',
+    cta: { label: 'View on GitHub', href: 'https://github.com/perfsage', external: true },
+    learnMore: '/slo-plugin/',
+    badge: 'Free',
+    badgeVariant: 'teal',
+  },
+  {
+    icon: '&#129302;',
+    name: 'AI Test Insights',
+    tagline: 'Python API · Open Source',
+    description:
+      'Script SLO-aware analysis pipelines with the PerfSage Python API. From raw data to actionable anomaly signals in seconds — designed for CI/CD.',
+    cta: { label: 'View on GitHub', href: 'https://github.com/perfsage', external: true },
+    learnMore: '/slo-plugin/',
+    badge: 'Free',
+    badgeVariant: 'teal',
+  },
+  {
+    icon: '&#128030;',
+    name: 'Chaos Engineering Toolkit',
+    tagline: 'Consulting · Hands-On',
+    description:
+      'Structured fault injection strategy, Kubernetes chaos experiments, and CI-integrated resilience gates — delivered as a consulting engagement.',
+    cta: { label: 'Book a Session', href: 'https://topmate.io/abajpai/659595', external: true },
+    learnMore: '/chaos-engineering/',
+    badge: 'Paid',
+    badgeVariant: 'primary',
+  },
+  {
+    icon: '&#127891;',
+    name: '1:1 Mentorship',
+    tagline: 'Performance Engineering & SRE',
+    description:
+      'Work directly with a 9+ year veteran on your hardest performance problems, career growth, and interview prep. Sessions available on Topmate.',
+    cta: { label: 'Book on Topmate', href: 'https://topmate.io/abajpai/659595', external: true },
+    learnMore: '/mentorship/',
+    badge: 'Paid',
+    badgeVariant: 'primary',
+  },
+  {
+    icon: '&#128221;',
+    name: 'Engineering Blog',
+    tagline: 'thinkbits.org · Free',
+    description:
+      'Deep guides on performance analysis, percentiles, capacity planning, SRE patterns, and reliability engineering from the trenches.',
+    cta: { label: 'Read the Blog', href: 'https://thinkbits.org', external: true },
+    learnMore: '/blog/',
+    badge: 'Free',
+    badgeVariant: 'teal',
+  },
+  {
+    icon: '&#9881;',
+    name: 'eBPF Performance Profiler',
+    tagline: 'Micro-SaaS · Coming Soon',
+    description:
+      'Kernel-level continuous profiling with eBPF — CPU flame graphs, off-CPU analysis, and network I/O tracing delivered as a SaaS dashboard. Coming 2026.',
+    cta: { label: 'Join Waitlist', href: '/contact/', external: false },
+    learnMore: null,
+    badge: 'Soon',
+    badgeVariant: 'muted',
+  },
+];
+
+const pageSchema = [
+  ...tools
+    .filter((t) => t.badgeVariant !== 'muted')
+    .map((t) => ({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: t.name,
+      description: t.description,
+      url: t.learnMore ? `https://perfsage.com${t.learnMore}` : 'https://perfsage.com/tools/',
+      applicationCategory: 'DeveloperApplication',
+      author: {
+        '@type': 'Person',
+        name: 'Aashish Bajpai',
+        url: 'https://perfsage.com/about/',
+      },
+      offers: {
+        '@type': 'Offer',
+        price: t.badgeVariant === 'teal' ? '0' : undefined,
+        priceCurrency: 'USD',
+      },
+    })),
+];
+---
+
+<BaseLayout
+  title="Free Performance Engineering Tools — PerfSage"
+  description="Free and paid performance engineering tools: SLO Reporter JMeter plugin, AI test insights, chaos engineering consulting, mentorship, and upcoming eBPF profiler SaaS."
+  schema={pageSchema}
+>
+  <SiteNav />
+
+  <main>
+    <header class="hero hero--tools">
+      <div class="container hero-inner">
+        <div class="badge" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Tools & Resources
+        </div>
+        <h1 data-reveal>
+          Free Performance <span class="gradient-text">Engineering Tools</span>
+        </h1>
+        <p class="hero-subtitle" data-reveal>
+          Open-source plugins, AI-powered analysis APIs, consulting engagements, and a growing Micro-SaaS ecosystem —
+          everything you need to make systems blazing fast.
+        </p>
+      </div>
+    </header>
+
+    <!-- Tools Grid -->
+    <section class="section">
+      <div class="container">
+        <div class="tools-grid">
+          {tools.map((tool) => (
+            <article class="tool-card" data-reveal>
+              <div class="tool-card__header">
+                <div class="tool-icon" aria-hidden="true" set:html={tool.icon} />
+                <span class={`tool-badge tool-badge--${tool.badgeVariant}`}>{tool.badge}</span>
+              </div>
+              <div class="tool-card__body">
+                <p class="tool-tagline">{tool.tagline}</p>
+                <h2 class="tool-name">{tool.name}</h2>
+                <p class="tool-desc">{tool.description}</p>
+              </div>
+              <div class="tool-card__foot">
+                {tool.cta.external ? (
+                  <a
+                    class="btn btn-primary"
+                    href={tool.cta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {tool.cta.label} &#10142;
+                  </a>
+                ) : (
+                  <a class="btn btn-primary" href={tool.cta.href}>
+                    {tool.cta.label} &#10142;
+                  </a>
+                )}
+                {tool.learnMore && (
+                  <a class="btn btn-outline" href={tool.learnMore}>
+                    Learn More
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Micro-SaaS Preview -->
+    <section class="section">
+      <div class="container">
+        <div class="card microsaas-banner" data-reveal>
+          <div class="microsaas-content">
+            <div class="badge">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              Building in Public
+            </div>
+            <h2 style="margin-top: 12px;">Micro-SaaS Coming in 2026</h2>
+            <p class="section-subtitle" style="margin-top: 8px;">
+              An eBPF-powered continuous profiling SaaS — kernel-level CPU flame graphs, off-CPU analysis, and network
+              I/O tracing delivered in a zero-instrumentation dashboard. No agents, no code changes.
+            </p>
+            <div class="cta-row" style="margin-top: 18px;">
+              <a class="btn btn-primary" href="/contact/">Join the Waitlist &#10142;</a>
+              <a class="btn btn-outline" href="/about/">Meet the Builder</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-panel" data-reveal>
+          <h2>Have a Specific Problem to Solve?</h2>
+          <p>From a tricky JMeter script to a full SLO/observability overhaul — let's talk.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="/contact/">Contact &#10142;</a>
+            <a class="btn btn-outline" href="https://github.com/perfsage" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .hero--tools {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .tool-card {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+
+  .tool-card:hover {
+    border-color: rgba(124, 106, 247, 0.45);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+    transform: translateY(-3px);
+  }
+
+  .tool-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tool-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .tool-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .tool-badge--teal {
+    background: rgba(0, 212, 170, 0.12);
+    color: var(--teal);
+    border: 1px solid rgba(0, 212, 170, 0.3);
+  }
+
+  .tool-badge--primary {
+    background: rgba(124, 106, 247, 0.12);
+    color: var(--primary);
+    border: 1px solid rgba(124, 106, 247, 0.3);
+  }
+
+  .tool-badge--muted {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--muted-2);
+    border: 1px solid var(--stroke);
+  }
+
+  .tool-card__body {
+    flex: 1;
+  }
+
+  .tool-tagline {
+    font-size: 0.75rem;
+    color: var(--muted-2);
+    font-family: 'JetBrains Mono', monospace;
+    margin: 0 0 6px;
+    letter-spacing: 0.03em;
+  }
+
+  .tool-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--text);
+  }
+
+  .tool-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .tool-card__foot {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .microsaas-banner {
+    padding: 36px 40px;
+  }
+
+  .microsaas-content {
+    max-width: 680px;
+  }
+
+  @media (max-width: 600px) {
+    .tools-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .microsaas-banner {
+      padding: 24px 20px;
+    }
+  }
+</style>
