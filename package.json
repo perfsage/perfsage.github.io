@@ -11,6 +11,7 @@
     "analyze-site": "tsx scripts/analyze-site.ts"
   },
   "dependencies": {
+    "@astrojs/sitemap": "3.7.2",
     "astro": "^5.7.0"
   },
   "devDependencies": {

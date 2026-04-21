@@ -2,11 +2,50 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+
+const aboutSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Aashish Bajpai',
+    url: 'https://perfsage.com/about/',
+    image: 'https://perfsage.com/images/aashish-bajpai.png',
+    jobTitle: 'Senior Performance Engineer & SRE',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'VMware',
+    },
+    knowsAbout: [
+      'Performance Engineering',
+      'Site Reliability Engineering',
+      'Apache JMeter',
+      'Chaos Engineering',
+      'SLO/SLI',
+      'Kubernetes',
+      'eBPF',
+    ],
+    sameAs: [
+      'https://linkedin.com/in/aashu320',
+      'https://x.com/aashu320',
+      'https://github.com/perfsage',
+      'https://topmate.io/abajpai/659595',
+    ],
+    alumniOf: [
+      { '@type': 'Organization', name: 'VMware' },
+      { '@type': 'Organization', name: 'Ernst & Young' },
+      { '@type': 'Organization', name: 'Oracle' },
+      { '@type': 'Organization', name: 'Infor' },
+      { '@type': 'Organization', name: 'Cavisson Systems' },
+    ],
+  },
+];
 ---
 
 <BaseLayout
   title="About — PerfSage"
   description="Meet Aashish Bajpai: 9+ years in performance engineering, SRE, and reliability at VMware, EY, Oracle and more."
+  pageType="profile"
+  schema={aboutSchema}
 >
   <SiteNav />
 
@@ -24,6 +63,7 @@ import SiteFooter from '../components/SiteFooter.astro';
             width="160"
             height="160"
             loading="eager"
+            fetchpriority="high"
           />
         </div>
 
