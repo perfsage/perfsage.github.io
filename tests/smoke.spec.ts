@@ -58,6 +58,17 @@ test.describe('Smoke', () => {
     expect(errors, `Console errors on blog post: ${errors.join('; ')}`).toEqual([]);
   });
 
+  test('blog post — article body is visible without scrolling (no reveal trap)', async ({ page }) => {
+    await page.goto('/blog/the-p99-trap-why-your-load-test-passed-production-failed/', {
+      waitUntil: 'domcontentloaded',
+    });
+    const prose = page.locator('article.prose');
+    await expect(prose).toBeVisible();
+    await expect(prose.getByRole('heading', { name: /stand-up that didn/i })).toBeVisible();
+    const opacity = await prose.evaluate((el) => getComputedStyle(el).opacity);
+    expect(Number(opacity)).toBeGreaterThan(0.9);
+  });
+
   test('home — recent posts section is visible', async ({ page }) => {
     await page.goto('/');
     await expect(page.getByText('From the Blog')).toBeVisible();

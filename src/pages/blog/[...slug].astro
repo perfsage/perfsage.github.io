@@ -63,7 +63,8 @@ const readingTime = Math.max(1, Math.ceil(post.body!.split(/\s+/).length / 200))
     <section class="section" style="padding-top: 0;">
       <div class="container">
         <div class="post-layout">
-          <article class="prose card" data-reveal>
+          <!-- No data-reveal: long posts never hit IO threshold (10% of element height) and stay invisible -->
+          <article class="prose card">
             <Content />
           </article>
 
