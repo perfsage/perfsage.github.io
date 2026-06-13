@@ -223,6 +223,7 @@ docker run -d \
 Then open **http://localhost:8000** and upload any JMeter `.jtl`, `.csv`, or `.xml` result file.
 
 - **GitHub:** [github.com/perfsage/reveal](https://github.com/perfsage/reveal) — source, issues, and roadmap
+- **Product page:** [/reveal/](/reveal/) — JMeter JTL analysis landing with quick start and FAQ
 - **Docker Hub:** [hub.docker.com/r/aashu3201/reveal](https://hub.docker.com/r/aashu3201/reveal) — pull and run
 - **Book a call:** [topmate.io/abajpai](https://topmate.io/abajpai/659595) — if you want help setting up perf analysis pipelines for your team
 

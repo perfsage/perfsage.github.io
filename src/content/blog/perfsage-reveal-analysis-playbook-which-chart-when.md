@@ -366,6 +366,7 @@ docker run -d \
 Open **http://localhost:8000**, upload any `.jtl`, and run this playbook against your own run.
 
 - **GitHub:** [github.com/perfsage/reveal](https://github.com/perfsage/reveal)
+- **Product page:** [/reveal/](/reveal/) — landing, symptom→chart table, Docker quick start
 - **Launch story:** [JMeter Gave Me Reports. I Needed Answers](/blog/introducing-perfsage-reveal-jmeter-analysis/)
 - **Tail latency deep dive:** [The P99 Trap](/blog/the-p99-trap-why-your-load-test-passed-production-failed/)
 - **Book a call:** [topmate.io/abajpai](https://topmate.io/abajpai/659595)

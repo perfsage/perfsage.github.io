@@ -253,7 +253,10 @@ If this resonated, the two posts that set up the tooling behind these examples:
 **Try the tools:**
 
 - [PerfSage SLO Reporter on GitHub](https://github.com/perfsage/perfsage-slo-reporter) — JMeter plugin for SLO gates in CI
-- [PerfSage Reveal on GitHub](https://github.com/perfsage/reveal) — upload a JTL, get tail analysis and shareable reports
+- [SLO Reporter product page](/slo-plugin/) — plugin overview, FAQ, and quick start
+- [PerfSage Reveal](/reveal/) — upload a JTL, get tail analysis and shareable reports
+- [PerfSage Reveal on GitHub](https://github.com/perfsage/reveal) — source and Docker image
+- [SignalPilot](/signalpilot/) — Kubernetes RCA after deploy (launching soon)
 - [Book a call](https://topmate.io/abajpai/659595) — if you want help defining percentile SLOs for your stack
 
 ---

@@ -107,6 +107,21 @@ test.describe('Smoke', () => {
     await expect(page).toHaveTitle(/Documentation/i);
   });
 
+  test('blog post — related Field Notes section when tags overlap', async ({ page }) => {
+    await page.goto('/blog/introducing-perfsage-reveal-jmeter-analysis/', { waitUntil: 'domcontentloaded' });
+    await expect(page.getByRole('heading', { name: 'Related Field Notes' })).toBeVisible();
+    await expect(page.locator('.related-posts__link').first()).toBeVisible();
+  });
+
+  test('blog index — product ladder links to reveal and signalpilot', async ({ page }) => {
+    await page.goto('/blog/', { waitUntil: 'domcontentloaded' });
+    await expect(page.getByRole('link', { name: /Reveal — JMeter JTL/i })).toHaveAttribute('href', '/reveal/');
+    await expect(page.getByRole('link', { name: /SignalPilot — K8s RCA/i })).toHaveAttribute(
+      'href',
+      '/signalpilot/',
+    );
+  });
+
   test('changelog — still loads (legacy page)', async ({ page }) => {
     await page.goto('/changelog/', { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveTitle(/Changelog/i);

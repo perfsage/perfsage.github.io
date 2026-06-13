@@ -15,6 +15,8 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
 const fmtDate = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -24,6 +26,22 @@ const slug = post.id.replace(/\.mdx?$/, '');
 const postUrl = `https://perfsage.com/blog/${slug}/`;
 const ogImage = post.data.heroImage ?? '/images/perfsage-logo.png';
 const modified = post.data.updatedDate ?? post.data.pubDate;
+
+const postSlug = (id: string) => id.replace(/\.mdx?$/, '');
+
+const relatedPosts = allPosts
+  .filter((p) => p.id !== post.id)
+  .map((p) => ({
+    post: p,
+    score: p.data.tags.filter((tag) => post.data.tags.includes(tag)).length,
+  }))
+  .sort(
+    (a, b) =>
+      b.score - a.score ||
+      b.post.data.pubDate.getTime() - a.post.data.pubDate.getTime(),
+  )
+  .slice(0, 3)
+  .map((entry) => entry.post);
 
 const blogSchema = [
   {
@@ -115,13 +133,38 @@ const blogSchema = [
     <section class="section" style="padding-top: 0;">
       <div class="container">
         <div class="post-layout">
-          <article class="prose card">
-            <Content />
-          </article>
+          <div class="post-main">
+            <article class="prose card">
+              <Content />
+            </article>
+
+            {relatedPosts.length > 0 && (
+              <section class="related-posts card" aria-labelledby="related-posts-heading">
+                <h2 id="related-posts-heading" class="card-heading">Related Field Notes</h2>
+                <ul class="related-posts__list">
+                  {relatedPosts.map((related) => (
+                    <li>
+                      <a href={`/blog/${postSlug(related.id)}/`} class="related-posts__link">
+                        <span class="related-posts__title">{related.data.title}</span>
+                        <span class="related-posts__desc">{related.data.description}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+          </div>
 
           <!-- Sidebar -->
           <aside class="post-sidebar">
-            <div class="card" style="position:sticky;top:88px;">
+            <div class="card sidebar-card" style="position:sticky;top:88px;">
+              <h3 class="card-heading" style="margin-bottom:14px;">PerfSage tools</h3>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+                <a class="btn btn-outline sidebar-tool-link" href="/reveal/">Reveal — JTL analysis</a>
+                <a class="btn btn-outline sidebar-tool-link" href="/signalpilot/">SignalPilot — K8s RCA</a>
+                <a class="btn btn-outline sidebar-tool-link" href="/slo-plugin/">SLO Reporter plugin</a>
+              </div>
+
               <h3 class="card-heading" style="margin-bottom:14px;">About the author</h3>
               <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
                 <img
@@ -163,3 +206,54 @@ const blogSchema = [
 
   <SiteFooter />
 </BaseLayout>
+
+<style>
+  .related-posts {
+    margin-top: 20px;
+    padding: 20px;
+  }
+
+  .related-posts__list {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .related-posts__link {
+    display: block;
+    padding: 12px 14px;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .related-posts__link:hover {
+    border-color: rgba(124, 106, 247, 0.45);
+    background: rgba(124, 106, 247, 0.06);
+  }
+
+  .related-posts__title {
+    display: block;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .related-posts__desc {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  .sidebar-tool-link {
+    text-align: center;
+    font-size: 0.82rem;
+    padding: 8px 12px;
+  }
+</style>
