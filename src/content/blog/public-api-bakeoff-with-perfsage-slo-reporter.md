@@ -193,6 +193,8 @@ The usual answer is "write a script." That script gets written, forgotten, broke
 ## Try it
 
 - **GitHub:** [perfsage/perfsage-slo-reporter](https://github.com/perfsage/perfsage-slo-reporter) — install, configuration, and examples
+- **Product page:** [/slo-plugin/](/slo-plugin/) — JMeter SLO Reporter plugin overview and FAQ
+- **Analyze JTLs:** [/reveal/](/reveal/) — PerfSage Reveal for post-run chart analysis
 - **Apache JMeter:** [jmeter.apache.org](https://jmeter.apache.org/) — the load testing tool this plugin extends
 - **Book a call:** [topmate.io/abajpai](https://topmate.io/abajpai/659595) — if you want help setting up SLO-based performance pipelines
 

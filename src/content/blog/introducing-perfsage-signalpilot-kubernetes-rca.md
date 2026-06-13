@@ -2,7 +2,6 @@
 title: "Deploy Broke Prod Again — So I Built PerfSage SignalPilot"
 description: "After one too many post-deploy war rooms staring at kubectl and Grafana separately, I built SignalPilot — an open-source Kubernetes RCA copilot that correlates deploy diffs, events, metrics, logs, and git into ranked findings with kubectl fixes."
 pubDate: 2026-06-13
-draft: true
 heroImage: "/images/signalpilot-og.svg"
 tags: ["Kubernetes", "SRE", "performance engineering", "Field Notes", "open source", "product launch"]
 author: "Aashish Bajpai"

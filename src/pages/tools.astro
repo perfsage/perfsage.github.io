@@ -73,11 +73,11 @@ const tools = [
   {
     icon: '&#128221;',
     name: 'Engineering Blog',
-    tagline: 'thinkbits.org · Free',
+    tagline: 'Field Notes · perfsage.com/blog',
     description:
-      'Deep guides on performance analysis, percentiles, capacity planning, SRE patterns, and reliability engineering from the trenches.',
-    cta: { label: 'Read the Blog', href: 'https://thinkbits.org', external: true },
-    learnMore: '/blog/',
+      'Practical performance engineering — JMeter deep dives, p99 tail latency, SLO gates, and Kubernetes RCA on perfsage.com/blog.',
+    cta: { label: 'Read Field Notes', href: '/blog/', external: false },
+    learnMore: 'https://thinkbits.org',
     badge: 'Free',
     badgeVariant: 'teal',
   },
@@ -91,7 +91,13 @@ const pageSchema = [
       '@type': 'SoftwareApplication',
       name: t.name,
       description: t.description,
-      url: t.learnMore ? `https://perfsage.com${t.learnMore}` : 'https://perfsage.com/tools/',
+      url: t.learnMore?.startsWith('http')
+        ? t.learnMore
+        : t.learnMore
+          ? `https://perfsage.com${t.learnMore}`
+          : t.cta.href.startsWith('http')
+            ? t.cta.href
+            : `https://perfsage.com${t.cta.href}`,
       applicationCategory: 'DeveloperApplication',
       author: {
         '@type': 'Person',
@@ -162,9 +168,20 @@ const pageSchema = [
                   </a>
                 )}
                 {tool.learnMore && (
-                  <a class="btn btn-outline" href={tool.learnMore}>
-                    Learn More
-                  </a>
+                  tool.learnMore.startsWith('http') ? (
+                    <a
+                      class="btn btn-outline"
+                      href={tool.learnMore}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      thinkbits.org &#10142;
+                    </a>
+                  ) : (
+                    <a class="btn btn-outline" href={tool.learnMore}>
+                      Learn More
+                    </a>
+                  )
                 )}
               </div>
             </article>
