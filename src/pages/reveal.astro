@@ -1,0 +1,352 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const GITHUB_URL = 'https://github.com/perfsage/reveal';
+const OG_IMAGE = '/images/blog/perfsage-reveal-launch/PerfsageReveal-Homepage.png';
+
+const faqs = [
+  {
+    q: 'What is PerfSage Reveal?',
+    a: 'An open-source JMeter JTL analysis tool. Upload any JTL file and get 29 expert charts, SLO verdicts, smart recommendations, and shareable HTML/PDF reports — one Docker command, no toolchain.',
+  },
+  {
+    q: 'How is Reveal different from JMeter HTML reports?',
+    a: 'JMeter HTML reports show what happened. Reveal explains what it means — tail latency ratios, error timelines, Apdex, and which chart to open first for your symptom.',
+  },
+  {
+    q: 'What file formats does it accept?',
+    a: 'Standard JMeter JTL/CSV result files from any test plan. Upload via the web UI or run the Docker container locally.',
+  },
+  {
+    q: 'Can I define SLO thresholds?',
+    a: 'Yes. Reveal evaluates p95/p99 latency, error rate, and throughput against your targets and surfaces pass/fail verdicts with Apdex gauges.',
+  },
+  {
+    q: 'How do I run it?',
+    a: 'docker pull aashu3201/reveal:latest, run the container on port 8000, upload your JTL. Full commands on this page and the launch Field Notes post.',
+  },
+  {
+    q: 'Is it free?',
+    a: 'Yes — open source on GitHub. For CI gates in pipelines, pair with PerfSage SLO Reporter. For prod RCA after deploy, see SignalPilot.',
+  },
+];
+
+const pageSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'PerfSage Reveal',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Linux, macOS, Windows',
+    description: 'Open-source JMeter JTL analysis — expert charts, SLO verdicts, and actionable recommendations in one Docker command.',
+    url: 'https://perfsage.com/reveal/',
+    downloadUrl: GITHUB_URL,
+    author: {
+      '@type': 'Person',
+      name: 'Aashish Bajpai',
+      url: 'https://perfsage.com/about/',
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://perfsage.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://perfsage.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Reveal', item: 'https://perfsage.com/reveal/' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="JMeter JTL Analysis Tool — PerfSage Reveal"
+  description="Upload JMeter JTL files — get 29 expert charts, SLO verdicts, tail latency analysis, and shareable HTML reports. One Docker command. Open source."
+  ogImage={OG_IMAGE}
+  schema={pageSchema}
+>
+  <SiteNav />
+
+  <main>
+    <header class="hero hero--service">
+      <div class="container hero-inner">
+        <div class="badge" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Open Source · Docker
+        </div>
+        <h1 data-reveal>
+          JMeter JTL Analysis — <span class="gradient-text">Upload Results, Get Answers</span>
+        </h1>
+        <p class="hero-subtitle" data-reveal>
+          JMeter reports data. Reveal explains what to do next — expert charts, SLO verdicts, tail latency callouts,
+          and plain-English recommendations. One Docker command.
+        </p>
+        <div class="cta-row" data-reveal>
+          <a class="btn btn-primary" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+            View on GitHub &#10142;
+          </a>
+          <a class="btn btn-outline" href="/blog/perfsage-reveal-analysis-playbook-which-chart-when/">
+            Chart Playbook
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Symptom → chart → KPI</h2>
+        <div class="card data-table-wrap" data-reveal>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Symptom</th>
+                <th>Open first</th>
+                <th>KPI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Users say it's slow, average OK</td>
+                <td>Response time scatter</td>
+                <td>p99 ÷ median</td>
+              </tr>
+              <tr>
+                <td>Need release yes/no</td>
+                <td>SLO gauges + Apdex</td>
+                <td>SLO verdict, error %</td>
+              </tr>
+              <tr>
+                <td>Error rate &gt; 0</td>
+                <td>Error sunburst</td>
+                <td>errors by label + status</td>
+              </tr>
+              <tr>
+                <td>Flaky / inconsistent</td>
+                <td>IQR outlier scatter</td>
+                <td>CV, outliers beyond IQR</td>
+              </tr>
+              <tr>
+                <td>Capacity headroom</td>
+                <td>RT vs throughput</td>
+                <td>req/s at knee, p90 at plateau</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="section-subtitle" style="margin-top: 16px;" data-reveal>
+          Full decision tree in
+          <a href="/blog/perfsage-reveal-analysis-playbook-which-chart-when/">Field Notes #2 — The Reveal Playbook</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>What you get</h2>
+        <div class="feature-grid">
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128202;</div>
+              <h3>29 expert charts</h3>
+            </div>
+            <p>Scatter, boxplots, CDF, correlation matrix, error sunburst — built for perf engineers.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#127919;</div>
+              <h3>SLO verdicts</h3>
+            </div>
+            <p>Apdex gauges, error budget, p99 compliance — pass/fail before you write the incident doc.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128196;</div>
+              <h3>Shareable reports</h3>
+            </div>
+            <p>Export HTML and PDF for stand-ups, stakeholders, and archives.</p>
+          </article>
+        </div>
+        <figure class="reveal-screenshot" data-reveal>
+          <img
+            src="/images/blog/perfsage-reveal-launch/02-report-kpi-summary.png"
+            alt="PerfSage Reveal KPI summary with SLO verdict and expert recommendations"
+            loading="lazy"
+            width="1200"
+            height="675"
+          />
+          <figcaption>KPI summary and recommendations — first screen after JTL upload.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="quickstart">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Quick start</h2>
+        <div class="code-block" data-reveal aria-label="Reveal Docker quick start">
+          <pre><code><span class="tok-name">docker</span> <span class="tok-fn">pull</span> <span class="tok-str">aashu3201/reveal:latest</span>
+
+<span class="tok-name">docker</span> <span class="tok-fn">run</span> <span class="tok-str">-d</span> \
+  <span class="tok-op">--</span><span class="tok-name">name</span> <span class="tok-str">perfsage-reveal</span> \
+  <span class="tok-op">-</span><span class="tok-name">p</span> <span class="tok-str">8000:8000</span> \
+  <span class="tok-op">-</span><span class="tok-name">v</span> <span class="tok-str">perfsage-reveal-data:/app/data</span> \
+  <span class="tok-op">-</span><span class="tok-name">e</span> <span class="tok-str">PERFSAGE_SECRET="your-32-char-secret-here"</span> \
+  <span class="tok-str">aashu3201/reveal:latest</span>
+
+<span class="tok-comment"># Open http://localhost:8000 — upload your .jtl</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Frequently Asked Questions</h2>
+        <div class="faq-list" data-reveal>
+          {faqs.map(({ q, a }) => (
+            <details class="faq-item">
+              <summary class="faq-question">{q}</summary>
+              <p class="faq-answer">{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-panel" data-reveal>
+          <h2>Test in Reveal. Debug in prod with SignalPilot.</h2>
+          <p>Load test analysis here; Kubernetes RCA after deploy with SignalPilot.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+              GitHub &#10142;
+            </a>
+            <a class="btn btn-outline" href="/signalpilot/">SignalPilot</a>
+            <a class="btn btn-outline" href="/blog/introducing-perfsage-reveal-jmeter-analysis/">Launch story</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .hero--service {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .reveal-screenshot {
+    margin-top: 28px;
+  }
+
+  .reveal-screenshot img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--stroke);
+  }
+
+  .reveal-screenshot figcaption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .data-table-wrap {
+    padding: 0;
+    overflow-x: auto;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--stroke);
+  }
+
+  .data-table th {
+    font-weight: 600;
+    color: var(--muted-2);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .data-table td {
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .faq-item {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    padding: 18px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    font-size: 0.97rem;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.3rem;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  details[open] .faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 20px 18px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+</style>

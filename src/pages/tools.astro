@@ -11,7 +11,7 @@ const tools = [
     description:
       'Upload any JMeter JTL — get expert charts, SLO verdicts, smart recommendations, and shareable HTML/PDF reports. One Docker command, no toolchain.',
     cta: { label: 'View on GitHub', href: 'https://github.com/perfsage/reveal', external: true },
-    learnMore: '/blog/introducing-perfsage-reveal-jmeter-analysis/',
+    learnMore: '/reveal/',
     badge: 'New',
     badgeVariant: 'primary',
   },
@@ -36,6 +36,17 @@ const tools = [
     learnMore: '/slo-plugin/',
     badge: 'Free',
     badgeVariant: 'teal',
+  },
+  {
+    icon: '&#9889;',
+    name: 'PerfSage SignalPilot',
+    tagline: 'Kubernetes RCA · Open Source',
+    description:
+      'Post-deploy RCA copilot — correlates K8s events, metrics, logs, Prometheus, and git into ranked findings with copy-paste kubectl fixes. Launching soon.',
+    cta: { label: 'Star on GitHub', href: 'https://github.com/perfsage/signalpilot', external: true },
+    learnMore: '/signalpilot/',
+    badge: 'Launching Soon',
+    badgeVariant: 'primary',
   },
   {
     icon: '&#128030;',
@@ -70,17 +81,6 @@ const tools = [
     badge: 'Free',
     badgeVariant: 'teal',
   },
-  {
-    icon: '&#9881;',
-    name: 'eBPF Performance Profiler',
-    tagline: 'Micro-SaaS · Coming Soon',
-    description:
-      'Kernel-level continuous profiling with eBPF — CPU flame graphs, off-CPU analysis, and network I/O tracing delivered as a SaaS dashboard. Coming 2026.',
-    cta: { label: 'Join Waitlist', href: '/contact/', external: false },
-    learnMore: null,
-    badge: 'Soon',
-    badgeVariant: 'muted',
-  },
 ];
 
 const pageSchema = [
@@ -109,7 +109,7 @@ const pageSchema = [
 
 <BaseLayout
   title="Free Performance Engineering Tools — PerfSage"
-  description="Free and paid performance engineering tools: SLO Reporter JMeter plugin, AI test insights, chaos engineering consulting, mentorship, and upcoming eBPF profiler SaaS."
+  description="Open-source performance tools: PerfSage Reveal JTL analysis, SignalPilot Kubernetes RCA, SLO Reporter JMeter plugin, chaos consulting, and mentorship."
   schema={pageSchema}
 >
   <SiteNav />
@@ -125,8 +125,8 @@ const pageSchema = [
           Free Performance <span class="gradient-text">Engineering Tools</span>
         </h1>
         <p class="hero-subtitle" data-reveal>
-          Open-source plugins, AI-powered analysis APIs, consulting engagements, and a growing Micro-SaaS ecosystem —
-          everything you need to make systems blazing fast.
+          Open-source plugins, Kubernetes RCA, AI-powered analysis APIs, and consulting — everything you need to make
+          systems blazing fast from load test to production.
         </p>
       </div>
     </header>
@@ -169,29 +169,6 @@ const pageSchema = [
               </div>
             </article>
           ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Micro-SaaS Preview -->
-    <section class="section">
-      <div class="container">
-        <div class="card microsaas-banner" data-reveal>
-          <div class="microsaas-content">
-            <div class="badge">
-              <span class="pulse-dot" aria-hidden="true"></span>
-              Building in Public
-            </div>
-            <h2 style="margin-top: 12px;">Micro-SaaS Coming in 2026</h2>
-            <p class="section-subtitle" style="margin-top: 8px;">
-              An eBPF-powered continuous profiling SaaS — kernel-level CPU flame graphs, off-CPU analysis, and network
-              I/O tracing delivered in a zero-instrumentation dashboard. No agents, no code changes.
-            </p>
-            <div class="cta-row" style="margin-top: 18px;">
-              <a class="btn btn-primary" href="/contact/">Join the Waitlist &#10142;</a>
-              <a class="btn btn-outline" href="/about/">Meet the Builder</a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -316,21 +293,9 @@ const pageSchema = [
     flex-wrap: wrap;
   }
 
-  .microsaas-banner {
-    padding: 36px 40px;
-  }
-
-  .microsaas-content {
-    max-width: 680px;
-  }
-
   @media (max-width: 600px) {
     .tools-grid {
       grid-template-columns: 1fr;
-    }
-
-    .microsaas-banner {
-      padding: 24px 20px;
     }
   }
 </style>

@@ -12,7 +12,7 @@ test.describe('Navigation', () => {
 
   test('blog nav link navigates to blog listing', async ({ page }) => {
     await page.goto('/');
-    await page.getByRole('link', { name: 'Blog', exact: true }).click();
+    await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Blog', exact: true }).click();
     await expect(page).toHaveURL(/\/blog\//);
     await expect(page.locator('.blog-card').first()).toBeVisible();
   });
@@ -37,11 +37,11 @@ test.describe('Navigation', () => {
     await expect(page).toHaveURL(/\/contact\//);
   });
 
-  test('hero CTA "Explore Tools" anchor targets #tools section', async ({ page }) => {
+  test('hero CTA "Try Reveal" navigates to reveal page', async ({ page }) => {
     await page.goto('/');
-    await page.getByRole('link', { name: /Explore Tools/i }).click();
-    await expect(page).toHaveURL(/#tools/);
-    await expect(page.locator('#tools')).toBeInViewport();
+    await page.getByRole('link', { name: /Try Reveal/i }).click();
+    await expect(page).toHaveURL(/\/reveal\//);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/JMeter JTL/i);
   });
 
   test('external links use noopener noreferrer', async ({ page }) => {

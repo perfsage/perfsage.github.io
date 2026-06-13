@@ -1,0 +1,379 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const GITHUB_URL = 'https://github.com/perfsage/signalpilot';
+const LAUNCHING_SOON = true;
+
+const signalSources = [
+  { tier: '0', source: 'Deploy diff (image, env, resources, probes)', always: true },
+  { tier: '0', source: 'Git repo correlation (commit SHA → suspect files)', always: false },
+  { tier: '1', source: 'K8s API: restarts, OOMKilled, CrashLoopBackOff, probes', always: true },
+  { tier: '1', source: 'K8s Events: FailedScheduling, BackOff, Unhealthy', always: true },
+  { tier: '1', source: 'metrics-server: CPU/memory saturation vs limits', always: true },
+  { tier: '1', source: 'Container logs: drain3 clustering, new errors', always: true },
+  { tier: '2', source: 'cAdvisor: CPU throttling, memory working-set', always: true },
+  { tier: '2', source: 'Network: endpoint readiness, DNS failures', always: true },
+  { tier: '4', source: 'Prometheus: p95/p99, error rate, CFS throttle', always: false },
+];
+
+const rcaRules = [
+  { rule: 'oom_killed', signals: 'OOMKilled + mem near limit', fix: 'Raise memory limit' },
+  { rule: 'cpu_throttled', signals: 'CFS throttle > 30% + latency regression', fix: 'Raise CPU limit/request' },
+  { rule: 'crash_loop', signals: 'CrashLoopBackOff + log patterns + config diff', fix: 'Fix env vars, rollback' },
+  { rule: 'image_pull_error', signals: 'ImagePullBackOff / ErrImagePull', fix: 'Fix image tag, rollback' },
+  { rule: 'probe_failure', signals: 'Readiness/liveness probe failing', fix: 'Fix probe path/port/timing' },
+  { rule: 'code_regression', signals: 'New log fingerprints after deploy + git suspect', fix: 'Rollback, investigate commit' },
+];
+
+const faqs = [
+  {
+    q: 'What is PerfSage SignalPilot?',
+    a: 'An open-source Kubernetes RCA copilot that answers why errors and performance degradation happened after your last deployment — by correlating deploy diffs, K8s events, metrics, logs, Prometheus, and git into ranked findings with copy-paste kubectl fixes.',
+  },
+  {
+    q: 'How is this different from kubectl describe and dashboards?',
+    a: 'kubectl shows one object at a time. Dashboards show metrics without deploy context. SignalPilot fuses cross-source evidence into deterministic rules — e.g. OOMKilled + memory at 94% of limit + git commit touching heap code = undersized memory limit, with a concrete fix.',
+  },
+  {
+    q: 'What cluster permissions does it need?',
+    a: 'Read-only RBAC via deploy/signalpilot-rbac.yaml. It uses the Kubernetes API, metrics-server, and optional Prometheus auto-detection. No agents in your app pods.',
+  },
+  {
+    q: 'Can I use it in CI/CD?',
+    a: 'Yes. signalpilot gate exits non-zero on HIGH+ findings and can export JUnit XML for Jenkins or GitHub Actions — complement your load-test SLO gates from PerfSage SLO Reporter.',
+  },
+  {
+    q: 'Does it require Prometheus or an LLM?',
+    a: 'Prometheus enriches findings but is optional (auto-detected). LLM narrative polish is optional — core RCA rules and kubectl recommendations run without any API key.',
+  },
+  {
+    q: 'Is it free?',
+    a: 'Yes — MIT licensed open source. Test-time analysis with PerfSage Reveal; prod-time RCA with SignalPilot.',
+  },
+];
+
+const pageSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'PerfSage SignalPilot',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Linux, macOS, Windows',
+    description:
+      'Open-source Kubernetes RCA copilot — correlates deploy diffs, events, metrics, logs, and git into ranked findings with kubectl fixes.',
+    url: 'https://perfsage.com/signalpilot/',
+    downloadUrl: GITHUB_URL,
+    author: {
+      '@type': 'Person',
+      name: 'Aashish Bajpai',
+      url: 'https://perfsage.com/about/',
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://perfsage.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://perfsage.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'SignalPilot', item: 'https://perfsage.com/signalpilot/' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Kubernetes RCA Tool — PerfSage SignalPilot"
+  description="Open-source Kubernetes RCA copilot: post-deploy errors, OOMKilled, CrashLoopBackOff — correlated across K8s, metrics, logs, Prometheus, and git with kubectl fixes."
+  ogImage="/images/signalpilot-og.svg"
+  schema={pageSchema}
+>
+  <SiteNav />
+
+  <main>
+    <header class="hero hero--service">
+      <div class="container hero-inner">
+        <div class="badge" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          {LAUNCHING_SOON ? 'Launching Soon · Open Source' : 'New · Open Source'}
+        </div>
+        <h1 data-reveal>
+          Kubernetes RCA — <span class="gradient-text">Why Did Errors Spike After Deploy?</span>
+        </h1>
+        <p class="hero-subtitle" data-reveal>
+          SignalPilot correlates deploy diffs, K8s events, metrics-server, logs, cAdvisor, Prometheus, and git —
+          then ranks findings with copy-paste <code>kubectl</code> fixes. Analysis, not another dashboard.
+        </p>
+        <div class="cta-row" data-reveal>
+          <a class="btn btn-primary" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+            {LAUNCHING_SOON ? 'Star on GitHub for Launch Updates' : 'View on GitHub'} &#10142;
+          </a>
+          <a class="btn btn-outline" href="/reveal/">Test with Reveal</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>The loop</h2>
+        <p class="section-subtitle" data-reveal>observe → correlate → explain → recommend → verify → learn</p>
+        <div class="feature-grid">
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128269;</div>
+              <h3>Observe</h3>
+            </div>
+            <p>Parallel collectors across K8s API, logs, metrics, cAdvisor, Prometheus, and optional git history.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128279;</div>
+              <h3>Correlate</h3>
+            </div>
+            <p>Deterministic rules fuse cross-source evidence — each finding cites multiple signal types.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#128736;</div>
+              <h3>Recommend</h3>
+            </div>
+            <p>Ranked, copy-paste kubectl fixes — not generic advice.</p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-card__top">
+              <div class="feature-icon" aria-hidden="true">&#9989;</div>
+              <h3>Verify</h3>
+            </div>
+            <p>Baseline before a fix, compare after next deploy: Fixed vs Regressed vs Unchanged.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Signal sources</h2>
+        <div class="card data-table-wrap" data-reveal>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>Source</th>
+                <th>Always-on</th>
+              </tr>
+            </thead>
+            <tbody>
+              {signalSources.map((row) => (
+                <tr>
+                  <td>{row.tier}</td>
+                  <td>{row.source}</td>
+                  <td>{row.always ? 'Yes' : 'Optional'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>RCA rules</h2>
+        <div class="card data-table-wrap" data-reveal>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Rule</th>
+                <th>Trigger signals</th>
+                <th>Typical fix</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rcaRules.map((row) => (
+                <tr>
+                  <td><code>{row.rule}</code></td>
+                  <td>{row.signals}</td>
+                  <td>{row.fix}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="quickstart">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Quick start</h2>
+        <div class="tools-wrap">
+          <div class="card" data-reveal>
+            <h3 class="card-heading">From deploy to RCA report</h3>
+            <p class="section-subtitle" style="margin-top: 10px;">
+              Python 3.12+, kubectl configured, read-only RBAC applied.
+            </p>
+          </div>
+          <div class="code-block" data-reveal aria-label="SignalPilot quick start">
+            <pre><code><span class="tok-name">git</span> <span class="tok-fn">clone</span> <span class="tok-str">https://github.com/perfsage/signalpilot</span>
+<span class="tok-name">cd</span> <span class="tok-str">signalpilot</span> <span class="tok-op">&amp;&amp;</span> <span class="tok-name">pip</span> <span class="tok-fn">install</span> <span class="tok-str">-e</span> <span class="tok-str">.</span>
+
+<span class="tok-name">kubectl</span> <span class="tok-fn">apply</span> <span class="tok-str">-f</span> <span class="tok-str">deploy/signalpilot-rbac.yaml</span>
+
+<span class="tok-name">signalpilot</span> <span class="tok-fn">analyze</span> <span class="tok-str">my-namespace</span> <span class="tok-op">--</span><span class="tok-name">deployment</span> <span class="tok-str">my-app</span> <span class="tok-op">--</span><span class="tok-name">output</span> <span class="tok-str">report.html</span>
+
+<span class="tok-comment"># CI gate (exit 1 on HIGH+ findings)</span>
+<span class="tok-name">signalpilot</span> <span class="tok-fn">gate</span> <span class="tok-str">my-namespace</span> <span class="tok-op">--</span><span class="tok-name">deployment</span> <span class="tok-str">my-app</span> <span class="tok-op">--</span><span class="tok-name">junit-xml</span> <span class="tok-str">results.xml</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>PerfSage product ladder</h2>
+        <div class="cta-row" data-reveal>
+          <a class="btn btn-outline" href="/reveal/">PerfSage Reveal — JTL analysis</a>
+          <a class="btn btn-outline" href="/slo-plugin/">SLO Reporter — CI gates</a>
+          <a class="btn btn-outline" href="/blog/">Field Notes blog</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-reveal>Frequently Asked Questions</h2>
+        <div class="faq-list" data-reveal>
+          {faqs.map(({ q, a }) => (
+            <details class="faq-item">
+              <summary class="faq-question">{q}</summary>
+              <p class="faq-answer">{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-panel" data-reveal>
+          <h2>{LAUNCHING_SOON ? 'SignalPilot launches this week' : 'Ready to RCA your next deploy?'}</h2>
+          <p>Star the repo for release notifications. Pair with Reveal for load tests and SLO Reporter for CI gates.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+              GitHub &#10142;
+            </a>
+            <a class="btn btn-outline" href="/tools/">All Tools</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .hero--service {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .data-table-wrap {
+    padding: 0;
+    overflow-x: auto;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--stroke);
+  }
+
+  .data-table th {
+    font-weight: 600;
+    color: var(--muted-2);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .data-table td {
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .faq-item {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    padding: 18px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    font-size: 0.97rem;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.3rem;
+    color: var(--primary);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  details[open] .faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 20px 18px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+</style>

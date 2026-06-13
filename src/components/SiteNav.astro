@@ -9,6 +9,8 @@ const isContact = pathname === '/contact';
 const isTools = pathname === '/tools';
 const isServices =
   pathname === '/slo-plugin' ||
+  pathname === '/reveal' ||
+  pathname === '/signalpilot' ||
   pathname === '/chaos-engineering' ||
   pathname === '/mentorship';
 
@@ -48,6 +50,18 @@ const linkClass = (isActive: boolean) =>
         Services <span class="nav-dropdown__caret" aria-hidden="true">&#9660;</span>
       </button>
       <ul class="nav-dropdown__menu" role="menu">
+        <li role="none">
+          <a class="nav-dropdown__item" href="/reveal/" role="menuitem">
+            <span class="nav-dropdown__icon" aria-hidden="true">&#10024;</span>
+            Reveal
+          </a>
+        </li>
+        <li role="none">
+          <a class="nav-dropdown__item" href="/signalpilot/" role="menuitem">
+            <span class="nav-dropdown__icon" aria-hidden="true">&#9889;</span>
+            SignalPilot
+          </a>
+        </li>
         <li role="none">
           <a class="nav-dropdown__item" href="/slo-plugin/" role="menuitem">
             <span class="nav-dropdown__icon" aria-hidden="true">&#128200;</span>

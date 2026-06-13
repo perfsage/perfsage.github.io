@@ -18,12 +18,7 @@ const homeSchema = [
     '@type': 'WebSite',
     name: 'PerfSage',
     url: 'https://perfsage.com',
-    description: 'AI-powered performance engineering — JMeter plugins, SRE patterns, and reliability tools.',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://perfsage.com/blog/?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
-    },
+    description: 'AI-powered performance engineering — JMeter plugins, Kubernetes RCA, SRE patterns, and reliability tools.',
   },
   {
     '@context': 'https://schema.org',
@@ -45,12 +40,50 @@ const homeSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
+    name: 'PerfSage Reveal',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Linux, macOS, Windows',
+    description: 'Open-source JMeter JTL analysis — expert charts, SLO verdicts, and actionable recommendations.',
+    url: 'https://perfsage.com/reveal/',
+    downloadUrl: 'https://github.com/perfsage/reveal',
+    author: {
+      '@type': 'Person',
+      name: 'Aashish Bajpai',
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'PerfSage SignalPilot',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Linux, macOS, Windows',
+    description: 'Open-source Kubernetes RCA copilot for post-deploy errors and performance degradation.',
+    url: 'https://perfsage.com/signalpilot/',
+    downloadUrl: 'https://github.com/perfsage/signalpilot',
+    author: {
+      '@type': 'Person',
+      name: 'Aashish Bajpai',
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
     name: 'PerfSage SLO Reporter',
     applicationCategory: 'DeveloperApplication',
     operatingSystem: 'Linux, macOS, Windows',
     description: 'AI-powered JMeter SLO reporter plugin that turns raw JTL results into actionable performance reports with anomaly detection.',
     url: 'https://perfsage.com/slo-plugin/',
-    downloadUrl: 'https://github.com/perfsage',
+    downloadUrl: 'https://github.com/perfsage/perfsage-slo-reporter',
     author: {
       '@type': 'Person',
       name: 'Aashish Bajpai',
@@ -66,10 +99,27 @@ const homeSchema = [
 
 <BaseLayout
   title="PerfSage — Make Systems Blazing Fast"
-  description="AI-powered JMeter insights, SRE reliability patterns, and open-source performance engineering tools."
+  description="Open-source JMeter JTL analysis (Reveal), Kubernetes RCA (SignalPilot), SLO Reporter plugin, and SRE-grade reliability tools."
   schema={homeSchema}
 >
   <SiteNav />
+
+  <div class="announcement-bar" role="region" aria-label="Product announcement">
+    <div class="container announcement-bar__inner">
+      <span class="announcement-bar__text">
+        <strong>SignalPilot</strong> — Kubernetes RCA copilot launching this week.
+      </span>
+      <a class="announcement-bar__link" href="/signalpilot/">Learn more</a>
+      <a
+        class="announcement-bar__link announcement-bar__link--cta"
+        href="https://github.com/perfsage/signalpilot"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Star on GitHub
+      </a>
+    </div>
+  </div>
 
   <!-- ── Hero ─────────────────────────────────────────────── -->
   <header class="hero">
@@ -89,7 +139,8 @@ const homeSchema = [
       </p>
 
       <div class="cta-row" data-reveal>
-        <a class="btn btn-primary" href="#tools">Explore Tools &#10142;</a>
+        <a class="btn btn-primary" href="/reveal/">Try Reveal &#10142;</a>
+        <a class="btn btn-outline" href="/signalpilot/">SignalPilot</a>
         <a class="btn btn-outline" href="/about/">Meet Aashish</a>
       </div>
 
@@ -128,7 +179,7 @@ const homeSchema = [
         <span class="ticker-item">Performance Engineering &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">SRE &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">JMeter &nbsp;&middot;&nbsp;</span>
-        <span class="ticker-item">eBPF &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">SignalPilot &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">Kubernetes &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">Chaos Engineering &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">AI Analysis &nbsp;&middot;&nbsp;</span>
@@ -138,7 +189,7 @@ const homeSchema = [
         <span class="ticker-item">Performance Engineering &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">SRE &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">JMeter &nbsp;&middot;&nbsp;</span>
-        <span class="ticker-item">eBPF &nbsp;&middot;&nbsp;</span>
+        <span class="ticker-item">SignalPilot &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">Kubernetes &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">Chaos Engineering &nbsp;&middot;&nbsp;</span>
         <span class="ticker-item">AI Analysis &nbsp;&middot;&nbsp;</span>
@@ -164,7 +215,7 @@ const homeSchema = [
               <div class="feature-icon" aria-hidden="true">&#128268;</div>
               <h3>Open Source JMeter Plugins</h3>
             </div>
-            <p>Production-tested extensions to supercharge load testing workflows.</p>
+            <p>Production-tested extensions to supercharge load testing workflows. Start with <a href="/reveal/" class="inline-link">PerfSage Reveal</a>.</p>
           </article>
 
           <article class="feature-card" data-reveal>
@@ -197,7 +248,9 @@ const homeSchema = [
               <h3>Engineering Blog</h3>
             </div>
             <p>
-              Deep guides on performance analysis, percentiles, and reliability patterns at
+              Field notes on performance, SLOs, and reliability at
+              <a href="/blog/" class="inline-link">perfsage.com/blog</a>
+              — also on
               <a href="https://thinkbits.org" target="_blank" rel="noopener noreferrer" class="inline-link"
                 >thinkbits.org</a
               >.
@@ -316,3 +369,42 @@ const homeSchema = [
 
   <SiteFooter />
 </BaseLayout>
+
+<style>
+  .announcement-bar {
+    background: linear-gradient(90deg, rgba(124, 106, 247, 0.15), rgba(0, 212, 170, 0.12));
+    border-bottom: 1px solid var(--stroke);
+    padding: 10px 0;
+  }
+
+  .announcement-bar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px 16px;
+    font-size: 0.88rem;
+  }
+
+  .announcement-bar__text {
+    color: var(--muted);
+  }
+
+  .announcement-bar__text strong {
+    color: var(--text);
+  }
+
+  .announcement-bar__link {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .announcement-bar__link:hover {
+    text-decoration: underline;
+  }
+
+  .announcement-bar__link--cta {
+    color: var(--teal);
+  }
+</style>

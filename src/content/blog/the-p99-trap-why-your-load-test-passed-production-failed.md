@@ -2,6 +2,7 @@
 title: "The P99 Trap: Why Your Load Test Passed and Production Still Complained"
 description: "Averages lie. I learned that the hard way — twice in the same week. Here's how heavy tails hide in green dashboards, and the percentile checks that catch them before users do."
 pubDate: 2026-05-31
+heroImage: "/images/blog/perfsage-reveal-launch/03-scatter-chart.png"
 tags: ["performance engineering", "SLO", "JMeter", "Field Notes"]
 author: "Aashish Bajpai"
 ---

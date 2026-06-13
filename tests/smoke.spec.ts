@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Smoke', () => {
-  test('home — loads with title, hero h1, tools section, footer', async ({ page }) => {
+  test('home — loads with title, hero h1, announcement, footer', async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (e) => errors.push(e.message));
     page.on('console', (msg) => {
@@ -11,10 +11,37 @@ test.describe('Smoke', () => {
     await page.goto('/');
     await expect(page).toHaveTitle(/PerfSage/i);
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/Blazing Fast/i);
-    await expect(page.locator('#tools')).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Product announcement' })).toBeVisible();
     await expect(page.getByRole('contentinfo')).toBeVisible();
 
     expect(errors, `Console errors on home: ${errors.join('; ')}`).toEqual([]);
+  });
+
+  test('signalpilot landing — loads with K8s RCA title and GitHub CTA', async ({ page }) => {
+    await page.goto('/signalpilot/', { waitUntil: 'domcontentloaded' });
+    await expect(page).toHaveTitle(/SignalPilot|Kubernetes RCA/i);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Kubernetes RCA/i);
+    await expect(page.getByRole('main').getByRole('link', { name: /Star on GitHub for Launch Updates/i })).toHaveAttribute(
+      'href',
+      /github\.com\/perfsage\/signalpilot/,
+    );
+  });
+
+  test('reveal landing — loads with JMeter title and H1', async ({ page }) => {
+    await page.goto('/reveal/', { waitUntil: 'domcontentloaded' });
+    await expect(page).toHaveTitle(/Reveal|JMeter/i);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/JMeter JTL/i);
+  });
+
+  test('blog post — has article schema and non-logo og:image', async ({ page }) => {
+    await page.goto('/blog/introducing-perfsage-reveal-jmeter-analysis/', { waitUntil: 'domcontentloaded' });
+    const ogType = await page.locator('meta[property="og:type"]').getAttribute('content');
+    expect(ogType).toBe('article');
+    const ogImage = await page.locator('meta[property="og:image"]').getAttribute('content');
+    expect(ogImage).toBeTruthy();
+    expect(ogImage).not.toContain('perfsage-logo.png');
+    const ldJson = await page.locator('script[type="application/ld+json"]').first().textContent();
+    expect(ldJson).toContain('BlogPosting');
   });
 
   test('about — loads title and Aashish Bajpai heading', async ({ page }) => {
@@ -42,7 +69,7 @@ test.describe('Smoke', () => {
     const errors: string[] = [];
     page.on('pageerror', (e) => errors.push(e.message));
     await page.goto('/blog/', { waitUntil: 'domcontentloaded' });
-    await expect(page).toHaveTitle(/Blog.*PerfSage/i);
+    await expect(page).toHaveTitle(/Performance Engineering Blog|Blog.*PerfSage/i);
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/Blog/i);
     await expect(page.locator('.blog-card').first()).toBeVisible();
     expect(errors, `Console errors on blog index: ${errors.join('; ')}`).toEqual([]);
