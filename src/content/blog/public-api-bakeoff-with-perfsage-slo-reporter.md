@@ -2,6 +2,7 @@
 title: "I Couldn't Gate JMeter on SLOs — So I Fixed It for Good"
 description: "How one CI pipeline assignment exposed a gap in JMeter's ecosystem, and how PerfSage SLO Reporter fills it — with a real 5-API validation run to prove it."
 pubDate: 2026-04-05
+heroImage: "/images/blog/public-api-bakeoff/slo-report-dashboard.png"
 tags: ["JMeter", "SLO", "performance engineering", "open source", "CI/CD"]
 author: "Aashish Bajpai"
 ---

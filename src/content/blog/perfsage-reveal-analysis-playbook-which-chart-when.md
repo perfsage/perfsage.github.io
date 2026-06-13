@@ -2,6 +2,7 @@
 title: "The Reveal Playbook: Which Chart to Open First (and Which KPI Actually Matters)"
 description: "Stop staring at 29 charts in random order. A performance engineer's decision tree for PerfSage Reveal — symptom → visualization → KPI → next move. Real public-API demo, every screenshot included."
 pubDate: 2026-06-03
+heroImage: "/images/blog/perfsage-reveal-launch/02-report-kpi-summary.png"
 tags: ["performance engineering", "JMeter", "Field Notes", "open source"]
 author: "Aashish Bajpai"
 ---

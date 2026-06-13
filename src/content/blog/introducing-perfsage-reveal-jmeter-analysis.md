@@ -2,6 +2,7 @@
 title: "JMeter Gave Me Reports. I Needed Answers — So I Built PerfSage Reveal"
 description: "After years of drowning in JMeter HTML dashboards that report data but never explain it, I built PerfSage Reveal — upload a JTL, get expert charts, SLO verdicts, and actionable insights in one Docker command. Here's the real demo."
 pubDate: 2026-05-26
+heroImage: "/images/blog/perfsage-reveal-launch/PerfsageReveal-Homepage.png"
 tags: ["JMeter", "performance engineering", "AI", "open source", "product launch"]
 author: "Aashish Bajpai"
 ---
