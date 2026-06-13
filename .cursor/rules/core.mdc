@@ -28,4 +28,5 @@ When given a task, follow this loop without interruption:
 - Commits must follow Conventional Commits: `feat:`, `fix:`, `docs:`, `test:`, `refactor:`, `chore:`.
 - Never commit to `main` or `master` directly. Always use a feature branch.
 - Keep commits atomic — one logical change per commit.
+- After completing an implementation task (tests passing), commit on the working branch without waiting to be asked.
 - Before opening a PR, run all tests and confirm they pass.
