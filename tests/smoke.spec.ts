@@ -126,4 +126,21 @@ test.describe('Smoke', () => {
     await page.goto('/changelog/', { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveTitle(/Changelog/i);
   });
+
+  test('blog RSS — serves valid feed with latest post', async ({ page }) => {
+    const res = await page.goto('/blog/rss.xml', { waitUntil: 'domcontentloaded' });
+    expect(res?.status()).toBe(200);
+    const body = await page.content();
+    expect(body).toMatch(/<rss[^>]*version="2\.0"/);
+    expect(body).toContain('PerfSage Field Notes');
+    expect(body).toContain('why-im-building-signalpilot-kubernetes-rca');
+  });
+
+  test('llms.txt — discovery file is live', async ({ page }) => {
+    const res = await page.goto('/llms.txt', { waitUntil: 'domcontentloaded' });
+    expect(res?.status()).toBe(200);
+    const body = await page.locator('body').innerText();
+    expect(body).toContain('perfsage.com');
+    expect(body).toContain('SignalPilot');
+  });
 });

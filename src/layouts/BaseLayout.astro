@@ -27,6 +27,11 @@ const siteUrl = 'https://perfsage.com';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+
 const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 ---
 
@@ -40,6 +45,10 @@ const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="PerfSage Field Notes" href={`${siteUrl}/blog/rss.xml`} />
+
+    {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
+    {bingVerification && <meta name="msvalidate.01" content={bingVerification} />}
 
     <!-- Open Graph -->
     <meta property="og:type" content={pageType} />
@@ -80,6 +89,28 @@ const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     />
     <!-- Preload logo to reduce LCP -->
     <link rel="preload" as="image" href="/images/perfsage-logo.png" fetchpriority="high" />
+
+    {plausibleDomain && (
+      <script
+        is:inline
+        defer
+        data-domain={plausibleDomain}
+        src="https://plausible.io/js/script.js"
+      />
+    )}
+    {gaMeasurementId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`} />
+        <script is:inline define:vars={{ gaMeasurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', gaMeasurementId);
+        </script>
+      </>
+    )}
 
     <!-- Inline theme init — runs before paint to prevent flash -->
     <script is:inline>

@@ -8,7 +8,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "test:e2e": "playwright test",
-    "analyze-site": "tsx scripts/analyze-site.ts"
+    "analyze-site": "tsx scripts/analyze-site.ts",
+    "linkedin:chrome": "bash scripts/launch-linkedin-chrome.sh",
+    "linkedin:audit": "node scripts/linkedin-company-optimize.mjs audit",
+    "linkedin:apply": "node scripts/linkedin-company-optimize.mjs apply",
+    "seo:bootstrap": "node scripts/seo-bootstrap.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.2",
