@@ -1,0 +1,30 @@
+# PerfSage — https://perfsage.com
+
+> Open-source performance engineering: JMeter JTL analysis, Kubernetes RCA, SLO CI gates.
+
+## Canonical URLs
+
+- Home: https://perfsage.com/
+- Blog (Field Notes): https://perfsage.com/blog/
+- Blog RSS: https://perfsage.com/blog/rss.xml
+- Tools: https://perfsage.com/tools/
+- Reveal (JMeter JTL analysis): https://perfsage.com/reveal/
+- SignalPilot (Kubernetes RCA): https://perfsage.com/signalpilot/
+- SLO Reporter (JMeter plugin): https://perfsage.com/slo-plugin/
+- About: https://perfsage.com/about/
+- GitHub: https://github.com/perfsage
+- Contact: hello@perfsage.com
+
+## What PerfSage builds
+
+1. PerfSage Reveal — upload JMeter .jtl, get charts, SLO verdicts, recommendations (Docker, OSS)
+2. PerfSage SLO Reporter — JMeter Backend Listener for CI gates on p99, error rate, throughput
+3. PerfSage SignalPilot — post-deploy Kubernetes RCA; correlates deploy diff, events, metrics, logs, git
+
+## Topics
+
+Performance engineering, Apache JMeter, p99 tail latency, SLO/SLI/SLA, load testing, Kubernetes RCA, SRE, observability, chaos engineering.
+
+## Founder
+
+Aashish Bajpai — performance engineer & SRE (VMware, EY, Oracle). Bengaluru, India.
