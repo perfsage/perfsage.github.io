@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { GOOGLE_SITE_VERIFICATION } from '../config/seo';
 
 interface Props {
   title: string;
@@ -27,7 +28,8 @@ const siteUrl = 'https://perfsage.com';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
-const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const googleVerification =
+  import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || GOOGLE_SITE_VERIFICATION;
 const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
 const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;

@@ -143,4 +143,12 @@ test.describe('Smoke', () => {
     expect(body).toContain('perfsage.com');
     expect(body).toContain('SignalPilot');
   });
+
+  test('home — Google Search Console verification meta tag', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const content = await page
+      .locator('meta[name="google-site-verification"]')
+      .getAttribute('content');
+    expect(content).toBe('ptC-auIvLW7i43hQqm9iy4LANvZfHs55_QoyTRMeqAM');
+  });
 });
