@@ -13,6 +13,12 @@ author: "Aashish Bajpai"
 
 ---
 
+<div class="callout callout-info">
+<strong>Field Notes #4</strong> — For the <em>why</em> behind SignalPilot (war rooms, MTTR, expensive-tool gap), read <a href="/blog/why-im-building-signalpilot-kubernetes-rca/">I Got Tired of 3-Hour Post-Deploy War Rooms</a>.
+</div>
+
+---
+
 ## The question every deploy review should answer
 
 > *"Why are errors and performance degradation happening after my last deployment?"*
