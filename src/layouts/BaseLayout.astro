@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { GOOGLE_SITE_VERIFICATION } from '../config/seo';
+import { GOOGLE_SITE_VERIFICATION, PLAUSIBLE_DOMAIN } from '../config/seo';
 
 interface Props {
   title: string;
@@ -31,7 +31,7 @@ const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
 const googleVerification =
   import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || GOOGLE_SITE_VERIFICATION;
 const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
-const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN || PLAUSIBLE_DOMAIN;
 const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 
 const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
