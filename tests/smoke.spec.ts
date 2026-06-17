@@ -21,7 +21,7 @@ test.describe('Smoke', () => {
     await page.goto('/signalpilot/', { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveTitle(/SignalPilot|Kubernetes RCA/i);
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/Kubernetes RCA/i);
-    await expect(page.getByRole('main').getByRole('link', { name: /Star on GitHub for Launch Updates/i })).toHaveAttribute(
+    await expect(page.getByRole('main').getByRole('link', { name: /View on GitHub/i })).toHaveAttribute(
       'href',
       /github\.com\/perfsage\/signalpilot/,
     );

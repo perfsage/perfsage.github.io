@@ -4,7 +4,8 @@ import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
 const GITHUB_URL = 'https://github.com/perfsage/signalpilot';
-const LAUNCHING_SOON = true;
+const PYPI_INSTALL = 'pip install perfsage-signalpilot';
+const LAUNCHING_SOON = false;
 
 const signalSources = [
   { tier: '0', source: 'Deploy diff (image, env, resources, probes)', always: true },
@@ -47,6 +48,10 @@ const faqs = [
   {
     q: 'Does it require Prometheus or an LLM?',
     a: 'Prometheus enriches findings but is optional (auto-detected). LLM narrative polish is optional — core RCA rules and kubectl recommendations run without any API key.',
+  },
+  {
+    q: 'How fast is a SignalPilot RCA?',
+    a: 'Under 5 minutes for typical post-deploy regressions — deploy diff, events, metrics, and logs correlated into a single ranked report instead of hours of tab-switching across kubectl and dashboards.',
   },
   {
     q: 'Is it free?',
@@ -99,7 +104,7 @@ const pageSchema = [
 
 <BaseLayout
   title="Kubernetes RCA Tool — PerfSage SignalPilot"
-  description="Open-source Kubernetes RCA copilot: post-deploy errors, OOMKilled, CrashLoopBackOff — correlated across K8s, metrics, logs, Prometheus, and git with kubectl fixes."
+  description="Open-source Kubernetes RCA copilot: post-deploy errors in under 5 minutes. Cut MTTR with correlated K8s events, metrics, logs, and git — ranked findings with kubectl fixes."
   ogImage="/images/signalpilot-og.svg"
   schema={pageSchema}
 >
@@ -228,8 +233,7 @@ const pageSchema = [
             </p>
           </div>
           <div class="code-block" data-reveal aria-label="SignalPilot quick start">
-            <pre><code><span class="tok-name">git</span> <span class="tok-fn">clone</span> <span class="tok-str">https://github.com/perfsage/signalpilot</span>
-<span class="tok-name">cd</span> <span class="tok-str">signalpilot</span> <span class="tok-op">&amp;&amp;</span> <span class="tok-name">pip</span> <span class="tok-fn">install</span> <span class="tok-str">-e</span> <span class="tok-str">.</span>
+            <pre><code><span class="tok-name">pip</span> <span class="tok-fn">install</span> <span class="tok-str">perfsage-signalpilot</span>
 
 <span class="tok-name">kubectl</span> <span class="tok-fn">apply</span> <span class="tok-str">-f</span> <span class="tok-str">deploy/signalpilot-rbac.yaml</span>
 
@@ -271,7 +275,11 @@ const pageSchema = [
       <div class="container">
         <div class="cta-panel" data-reveal>
           <h2>{LAUNCHING_SOON ? 'SignalPilot launches this week' : 'Ready to RCA your next deploy?'}</h2>
-          <p>Star the repo for release notifications. Pair with Reveal for load tests and SLO Reporter for CI gates.</p>
+          <p>
+            {LAUNCHING_SOON
+              ? 'Star the repo for release notifications. Pair with Reveal for load tests and SLO Reporter for CI gates.'
+              : `${PYPI_INSTALL} · Pair with Reveal for load tests and SLO Reporter for CI gates.`}
+          </p>
           <div class="cta-row">
             <a class="btn btn-primary" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
               GitHub &#10142;
