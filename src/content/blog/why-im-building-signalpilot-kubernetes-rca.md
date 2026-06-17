@@ -8,7 +8,7 @@ author: "Aashish Bajpai"
 ---
 
 <div class="callout callout-info">
-<strong>Field Notes #4 · TL;DR</strong> — You deploy. Errors spike. Three people open three tools. Two hours later someone says <em>"maybe it's memory?"</em> I kept living this loop. <a href="https://github.com/perfsage/signalpilot" target="_blank" rel="noopener noreferrer">PerfSage SignalPilot</a> is my answer: an open-source Kubernetes RCA copilot that correlates deploy diffs, events, metrics, logs, and git — then ranks findings with copy-paste <code>kubectl</code> fixes. Not another dashboard. <span class="hl-orange">Analysis you can act on.</span> Launching soon. For the quick-start, read <a href="/blog/introducing-perfsage-signalpilot-kubernetes-rca/">Field Notes #3</a>.
+<strong>Field Notes #4 · TL;DR</strong> — You deploy. Errors spike. Three people open three tools. Two hours later someone says <em>"maybe it's memory?"</em> I kept living this loop. <a href="https://github.com/perfsage/signalpilot" target="_blank" rel="noopener noreferrer">PerfSage SignalPilot</a> is my answer: an open-source Kubernetes RCA copilot that correlates deploy diffs, events, metrics, logs, and git — then ranks findings with copy-paste <code>kubectl</code> fixes. Not another dashboard. <span class="hl-orange">Analysis you can act on.</span> <strong>Now live.</strong> <code>pip install perfsage-signalpilot</code>. For the launch walkthrough, read <a href="/blog/5-minute-post-deploy-postmortem-signalpilot/">Field Notes #5</a>.
 </div>
 
 ---
@@ -152,14 +152,20 @@ Test-time analysis and prod-time RCA share the same DNA: **reports data → expl
 
 ---
 
-## What's launching soon
+## Install now
 
-- **Repo:** [github.com/perfsage/signalpilot](https://github.com/perfsage/signalpilot)
+```bash
+pip install perfsage-signalpilot
+kubectl apply -f deploy/signalpilot-rbac.yaml
+signalpilot analyze my-namespace --deployment my-app --output report.html
+```
+
+- **Repo:** [github.com/perfsage/signalpilot](https://github.com/perfsage/signalpilot) · **Release:** [v1.0.0](https://github.com/perfsage/signalpilot/releases/tag/v1.0.0)
 - **`signalpilot analyze`** — HTML report with ranked findings and kubectl recommendations
 - **`signalpilot gate`** — pipeline gate with JUnit XML export
 - **Read-only RBAC** — `deploy/signalpilot-rbac.yaml` included; no agents in app pods
 
-Star the repo for release notifications. Try Reveal and SLO Reporter if you haven't — SignalPilot is the third rung on the same ladder.
+Try Reveal and SLO Reporter if you haven't — SignalPilot is the third rung on the same ladder.
 
 <div class="callout callout-info">
 <strong>Read next:</strong> <a href="/blog/introducing-perfsage-signalpilot-kubernetes-rca/">Field Notes #3 — Deploy Broke Prod Again</a> (quick start, rules table, CI gate). <a href="/signalpilot/">SignalPilot landing page</a>.
@@ -172,5 +178,7 @@ Star the repo for release notifications. Try Reveal and SLO Reporter if you have
 If you've ever stared at Grafana while someone said "should we rollback?" and nobody could point to evidence — this is for you.
 
 I'm building in public. Feedback, issues, and war-room stories welcome on [GitHub](https://github.com/perfsage/signalpilot/issues).
+
+**Also on Medium:** [How SignalPilot Correlates Kubernetes Signals for Post-Deploy RCA](https://medium.com/@aashish.bajpai2/how-signalpilot-correlates-kubernetes-signals-for-post-deploy-rca-86b509b088ac)
 
 *Field Notes #4 · By Aashish Bajpai*

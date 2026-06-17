@@ -256,7 +256,7 @@ If this resonated, the two posts that set up the tooling behind these examples:
 - [SLO Reporter product page](/slo-plugin/) — plugin overview, FAQ, and quick start
 - [PerfSage Reveal](/reveal/) — upload a JTL, get tail analysis and shareable reports
 - [PerfSage Reveal on GitHub](https://github.com/perfsage/reveal) — source and Docker image
-- [SignalPilot](/signalpilot/) — Kubernetes RCA after deploy (launching soon)
+- [SignalPilot](/signalpilot/) — Kubernetes RCA after deploy (open source, v1.0)
 - [Book a call](https://topmate.io/abajpai/659595) — if you want help defining percentile SLOs for your stack
 
 ---

@@ -19,7 +19,7 @@
 
 1. PerfSage Reveal — upload JMeter .jtl, get charts, SLO verdicts, recommendations (Docker, OSS)
 2. PerfSage SLO Reporter — JMeter Backend Listener for CI gates on p99, error rate, throughput
-3. PerfSage SignalPilot — post-deploy Kubernetes RCA; correlates deploy diff, events, metrics, logs, git
+3. PerfSage SignalPilot — post-deploy Kubernetes RCA; correlates deploy diff, events, metrics, logs, git. Install: pip install perfsage-signalpilot
 
 ## Topics
 
