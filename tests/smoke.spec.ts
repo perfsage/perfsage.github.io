@@ -152,9 +152,9 @@ test.describe('Smoke', () => {
     expect(content).toBe('ptC-auIvLW7i43hQqm9iy4LANvZfHs55_QoyTRMeqAM');
   });
 
-  test('home — Plausible analytics script', async ({ page }) => {
+  test('home — GA4 analytics script', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-    const script = page.locator('script[data-domain="perfsage.com"]');
-    await expect(script).toHaveAttribute('src', 'https://plausible.io/js/script.js');
+    const script = page.locator('script[src*="googletagmanager.com/gtag/js"]');
+    await expect(script).toHaveAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=G-ZWZG6CS3G3');
   });
 });

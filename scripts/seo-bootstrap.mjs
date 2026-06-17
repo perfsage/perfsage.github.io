@@ -65,8 +65,8 @@ function printManualSteps() {
    - Add site, verify, submit same sitemap
 
 3. Analytics (measure what works):
-   - Plausible (privacy-friendly): https://plausible.io → set PUBLIC_PLAUSIBLE_DOMAIN
-   - Or GA4 → set PUBLIC_GA_MEASUREMENT_ID
+   - GA4: https://analytics.google.com → Admin → Data streams → perfsage.com
+   - Set PUBLIC_GA_MEASUREMENT_ID in GitHub Secrets (or committed in src/config/seo.ts)
 
 4. Distribution (week 1):
    - Cross-post Field Notes to Dev.to + LinkedIn (personal + company)
