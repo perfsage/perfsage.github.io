@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#12121a"/>
+      <stop offset="1" stop-color="#1a1630"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c6af7"/>
+      <stop offset="1" stop-color="#00d4aa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="48" y="48" width="1104" height="534" rx="24" fill="none" stroke="url(#accent)" stroke-width="2" opacity="0.35"/>
+  <text x="80" y="160" font-family="system-ui,sans-serif" font-size="40" font-weight="700" fill="#ffffff">3 Fault-Injection Experiments</text>
+  <text x="80" y="210" font-family="system-ui,sans-serif" font-size="24" fill="#a8a8b8">Before your first chaos engineering game day</text>
+
+  <g font-family="ui-monospace,monospace">
+    <rect x="80" y="270" width="280" height="70" rx="12" fill="rgba(124,106,247,0.1)" stroke="#7c6af7" stroke-width="1.5"/>
+    <text x="100" y="298" font-size="16" font-weight="700" fill="#7c6af7">01 · Resource pressure</text>
+    <text x="100" y="320" font-size="13" fill="#c8c8d8">CPU throttle · memory pressure</text>
+
+    <rect x="380" y="270" width="280" height="70" rx="12" fill="rgba(0,212,170,0.1)" stroke="#00d4aa" stroke-width="1.5"/>
+    <text x="400" y="298" font-size="16" font-weight="700" fill="#00d4aa">02 · Pod kill</text>
+    <text x="400" y="320" font-size="13" fill="#c8c8d8">single replica · PDB aware</text>
+
+    <rect x="680" y="270" width="280" height="70" rx="12" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
+    <text x="700" y="298" font-size="16" font-weight="700" fill="#f97316">03 · Network fault</text>
+    <text x="700" y="320" font-size="13" fill="#c8c8d8">latency · packet loss</text>
+  </g>
+
+  <text x="80" y="420" font-family="system-ui,sans-serif" font-size="20" fill="#c8c8d8">Steady state ’ hypothesis ’ blast radius ’ observe ’ learn</text>
+  <text x="80" y="460" font-family="ui-monospace,monospace" font-size="16" fill="#00d4aa">Gremlin · Chaos Mesh · Litmus</text>
+</svg>
