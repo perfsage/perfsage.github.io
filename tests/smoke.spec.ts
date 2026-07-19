@@ -85,6 +85,19 @@ test.describe('Smoke', () => {
     expect(errors, `Console errors on blog post: ${errors.join('; ')}`).toEqual([]);
   });
 
+  test('blog post — SignalPilot CPU/memory sizing Field Notes loads', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto('/blog/cpu-memory-sizing-from-real-usage-signalpilot/', {
+      waitUntil: 'domcontentloaded',
+    });
+    await expect(page).toHaveTitle(/CPU|Memory|Sizing|SignalPilot|PerfSage Blog/i);
+    await expect(page.locator('.prose')).toBeVisible();
+    await expect(page.getByText('Field Notes #8 · TL;DR')).toBeVisible();
+    await expect(page.getByRole('contentinfo')).toBeVisible();
+    expect(errors, `Console errors on sizing blog post: ${errors.join('; ')}`).toEqual([]);
+  });
+
   test('blog post — article body is visible without scrolling (no reveal trap)', async ({ page }) => {
     await page.goto('/blog/the-p99-trap-why-your-load-test-passed-production-failed/', {
       waitUntil: 'domcontentloaded',

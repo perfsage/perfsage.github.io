@@ -17,32 +17,33 @@ import puppeteer from 'puppeteer-core';
 const COMPANY_ID = '115801924';
 const ADMIN_DASHBOARD = `https://www.linkedin.com/company/${COMPANY_ID}/admin/dashboard/`;
 
-const POST_TEXT = `Deploy went fine. Errors didn't.
+const POST_TEXT = `Most Kubernetes CPU/memory limits are folklore.
 
-I used to lose 2–3 hours in post-deploy war rooms:
-→ kubectl in one tab
-→ Grafana in another
-→ someone blaming the last commit
-→ still no defensible RCA
+Copied from another Deployment.
+Doubled after an OOM.
+Or left at whatever the Helm chart shipped in 2021.
 
-Today we're launching PerfSage SignalPilot v1.0 — open-source Kubernetes RCA that answers one question in under 5 minutes:
+That's not capacity planning. That's vibes with YAML syntax.
 
-"Why did errors spike after my last deploy?"
+New Field Notes #8 — how I size requests/limits from real usage:
 
-It correlates deploy diff + K8s events + metrics + logs + optional Prometheus/git into ranked findings with copy-paste kubectl fixes.
+→ memory working-set vs limit (not "average CPU looked fine")
+→ CFS throttle ratio (the silent p99 killer)
+→ FailedScheduling when requests are fantasy numbers
+→ deploy diff on resources.* so you know what this rollout changed
 
-Not another dashboard. Analysis you can act on.
+PerfSage SignalPilot correlates those signals into ranked findings with copy-paste kubectl fixes — so the next resource PR is a number you can defend.
+
+Read:
+https://perfsage.com/blog/cpu-memory-sizing-from-real-usage-signalpilot/
 
 Try it:
 pip install perfsage-signalpilot
 github.com/perfsage/signalpilot
 
-Field Notes walkthrough:
-👉 https://perfsage.com/blog/5-minute-post-deploy-postmortem-signalpilot/
+Not another dashboard. Analysis you can act on.
 
-Part of the PerfSage ladder: Reveal (load tests) → SLO Reporter (CI gates) → SignalPilot (prod RCA).
-
-#Kubernetes #SRE #OpenSource #Observability #PerfSage`;
+#Kubernetes #SRE #DevOps #CapacityPlanning #OpenSource #PerfSage`;
 
 const args = new Set(process.argv.slice(2));
 const DRY_RUN = args.has('--dry-run') || !args.has('--post');
