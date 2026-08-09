@@ -1,6 +1,6 @@
 # PerfSage — https://perfsage.com
 
-> Open-source performance engineering: JMeter JTL analysis, Kubernetes RCA, SLO CI gates.
+> Open-source performance engineering: agent-operated JMeter, JTL analysis, Kubernetes RCA, SLO CI gates.
 
 ## Canonical URLs
 
@@ -11,19 +11,21 @@
 - Reveal (JMeter JTL analysis): https://perfsage.com/reveal/
 - SignalPilot (Kubernetes RCA): https://perfsage.com/signalpilot/
 - SLO Reporter (JMeter plugin): https://perfsage.com/slo-plugin/
+- JMeter MCP launch: https://perfsage.com/blog/introducing-perfsage-jmeter-mcp/
 - About: https://perfsage.com/about/
 - GitHub: https://github.com/perfsage
 - Contact: hello@perfsage.com
 
 ## What PerfSage builds
 
-1. PerfSage Reveal — upload JMeter .jtl, get charts, SLO verdicts, recommendations (Docker, OSS)
-2. PerfSage SLO Reporter — JMeter Backend Listener for CI gates on p99, error rate, throughput
-3. PerfSage SignalPilot — post-deploy Kubernetes RCA; correlates deploy diff, events, metrics, logs, git. Install: pip install perfsage-signalpilot
+1. PerfSage JMeter MCP — self-healing JMeter for LLM agents (heal, correlate, discover, p95/p99 verdict). Install: uvx perfsage-jmeter-mcp · https://github.com/perfsage/perfsage-jmeter-mcp
+2. PerfSage Reveal — upload JMeter .jtl, get charts, SLO verdicts, recommendations (Docker, OSS)
+3. PerfSage SLO Reporter — JMeter Backend Listener for CI gates on p99, error rate, throughput
+4. PerfSage SignalPilot — post-deploy Kubernetes RCA; correlates deploy diff, events, metrics, logs, git. Install: pip install perfsage-signalpilot
 
 ## Topics
 
-Performance engineering, Apache JMeter, p99 tail latency, SLO/SLI/SLA, load testing, Kubernetes RCA, SRE, observability, chaos engineering.
+Performance engineering, Apache JMeter, MCP, LLM agents, p99 tail latency, SLO/SLI/SLA, load testing, Kubernetes RCA, SRE, observability, chaos engineering.
 
 ## Founder
 

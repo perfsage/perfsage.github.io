@@ -17,33 +17,34 @@ import puppeteer from 'puppeteer-core';
 const COMPANY_ID = '115801924';
 const ADMIN_DASHBOARD = `https://www.linkedin.com/company/${COMPANY_ID}/admin/dashboard/`;
 
-const POST_TEXT = `Most Kubernetes CPU/memory limits are folklore.
+const POST_TEXT = `Your LLM can talk about load tests.
 
-Copied from another Deployment.
-Doubled after an OOM.
-Or left at whatever the Helm chart shipped in 2021.
+Can it actually run JMeter?
 
-That's not capacity planning. That's vibes with YAML syntax.
+Wrong Java. Missing plugins. Hand-written CSRF extractors. Guesswork thread counts. Average-only "green" reports that lie.
 
-New Field Notes #8 — how I size requests/limits from real usage:
+I got tired of that toolchain tax — so I shipped PerfSage JMeter MCP.
 
-→ memory working-set vs limit (not "average CPU looked fine")
-→ CFS throttle ratio (the silent p99 killer)
-→ FailedScheduling when requests are fantasy numbers
-→ deploy diff on resources.* so you know what this rollout changed
+Point Cursor / Claude at it and ask for a performance test. The agent will:
 
-PerfSage SignalPilot correlates those signals into ranked findings with copy-paste kubectl fixes — so the next resource PR is a number you can defend.
+→ heal Java + Apache JMeter 5.6.3 under ~/.perfsage
+→ import HAR / OpenAPI / Postman
+→ auto-correlate tokens into extractors
+→ discover the capacity knee
+→ ship a PASS/WARN/FAIL led by p95 + p99
 
-Read:
-https://perfsage.com/blog/cpu-memory-sizing-from-real-usage-signalpilot/
+Not chatbot theater. Real tools. Real verdicts.
+
+Field Notes #9:
+https://perfsage.com/blog/introducing-perfsage-jmeter-mcp/
 
 Try it:
-pip install perfsage-signalpilot
-github.com/perfsage/signalpilot
+uvx perfsage-jmeter-mcp
+github.com/perfsage/perfsage-jmeter-mcp
 
-Not another dashboard. Analysis you can act on.
+Analysis, not dashboards.
 
-#Kubernetes #SRE #DevOps #CapacityPlanning #OpenSource #PerfSage`;
+#PerformanceEngineering #JMeter #MCP #LoadTesting #SRE #OpenSource #PerfSage`;
 
 const args = new Set(process.argv.slice(2));
 const DRY_RUN = args.has('--dry-run') || !args.has('--post');

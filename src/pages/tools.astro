@@ -5,6 +5,21 @@ import SiteFooter from '../components/SiteFooter.astro';
 
 const tools = [
   {
+    icon: '&#128268;',
+    name: 'PerfSage JMeter MCP',
+    tagline: 'LLM Agent Toolkit · Open Source',
+    description:
+      'Self-healing JMeter for Cursor/Claude — heal Java + JMeter, import HAR/OpenAPI/Postman, auto-correlate, discover capacity, ship a p95/p99 verdict. uvx perfsage-jmeter-mcp.',
+    cta: {
+      label: 'View on GitHub',
+      href: 'https://github.com/perfsage/perfsage-jmeter-mcp',
+      external: true,
+    },
+    learnMore: '/blog/introducing-perfsage-jmeter-mcp/',
+    badge: 'New',
+    badgeVariant: 'primary',
+  },
+  {
     icon: '&#10024;',
     name: 'PerfSage Reveal',
     tagline: 'JMeter Analysis · Docker · Open Source',
@@ -12,8 +27,8 @@ const tools = [
       'Upload any JMeter JTL — get expert charts, SLO verdicts, smart recommendations, and shareable HTML/PDF reports. One Docker command, no toolchain.',
     cta: { label: 'View on GitHub', href: 'https://github.com/perfsage/reveal', external: true },
     learnMore: '/reveal/',
-    badge: 'New',
-    badgeVariant: 'primary',
+    badge: 'Free',
+    badgeVariant: 'teal',
   },
   {
     icon: '&#128200;',
@@ -115,7 +130,7 @@ const pageSchema = [
 
 <BaseLayout
   title="Free Performance Engineering Tools — PerfSage"
-  description="Open-source performance tools: PerfSage Reveal JTL analysis, SignalPilot Kubernetes RCA, SLO Reporter JMeter plugin, chaos consulting, and mentorship."
+  description="Open-source performance tools: PerfSage JMeter MCP for LLM agents, Reveal JTL analysis, SignalPilot Kubernetes RCA, SLO Reporter, chaos consulting, and mentorship."
   schema={pageSchema}
 >
   <SiteNav />
