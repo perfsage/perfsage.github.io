@@ -98,6 +98,23 @@ test.describe('Smoke', () => {
     expect(errors, `Console errors on sizing blog post: ${errors.join('; ')}`).toEqual([]);
   });
 
+  test('blog post — JMeter MCP launch Field Notes loads', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto('/blog/introducing-perfsage-jmeter-mcp/', {
+      waitUntil: 'domcontentloaded',
+    });
+    await expect(page).toHaveTitle(/JMeter MCP|LLM|PerfSage Blog/i);
+    await expect(page.locator('.prose')).toBeVisible();
+    await expect(page.getByText('Field Notes #9 · TL;DR')).toBeVisible();
+    await expect(page.getByRole('main').getByRole('link', { name: /perfsage-jmeter-mcp/i }).first()).toHaveAttribute(
+      'href',
+      /github\.com\/perfsage\/perfsage-jmeter-mcp/,
+    );
+    await expect(page.getByRole('contentinfo')).toBeVisible();
+    expect(errors, `Console errors on JMeter MCP blog post: ${errors.join('; ')}`).toEqual([]);
+  });
+
   test('blog post — article body is visible without scrolling (no reveal trap)', async ({ page }) => {
     await page.goto('/blog/the-p99-trap-why-your-load-test-passed-production-failed/', {
       waitUntil: 'domcontentloaded',
@@ -126,8 +143,12 @@ test.describe('Smoke', () => {
     await expect(page.locator('.related-posts__link').first()).toBeVisible();
   });
 
-  test('blog index — product ladder links to reveal and signalpilot', async ({ page }) => {
+  test('blog index — product ladder links to jmeter mcp, reveal and signalpilot', async ({ page }) => {
     await page.goto('/blog/', { waitUntil: 'domcontentloaded' });
+    await expect(page.getByRole('link', { name: /JMeter MCP — LLM agents/i })).toHaveAttribute(
+      'href',
+      '/blog/introducing-perfsage-jmeter-mcp/',
+    );
     await expect(page.getByRole('link', { name: /Reveal — JMeter JTL/i })).toHaveAttribute('href', '/reveal/');
     await expect(page.getByRole('link', { name: /SignalPilot — K8s RCA/i })).toHaveAttribute(
       'href',

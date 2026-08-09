@@ -31,3 +31,8 @@ When given a task, follow this loop without interruption:
 - After completing an implementation task (tests passing), commit on the working branch without waiting to be asked.
 - **Ship loop (automatic):** push branch → `gh pr create` → wait for CI (`gh run watch`) → `gh pr merge --merge --delete-branch` → `git checkout main && git pull`.
 - Before opening a PR, run all tests and confirm they pass.
+
+## Blog / LinkedIn
+- Field Notes numbering is chronological by publish date (#9 = PerfSage JMeter MCP launch; #8 = CPU/memory sizing from real usage, SignalPilot).
+- JMeter MCP: https://github.com/perfsage/perfsage-jmeter-mcp · `uvx perfsage-jmeter-mcp` · launch post `/blog/introducing-perfsage-jmeter-mcp/`.
+- Company LinkedIn copy lives in `scripts/linkedin-company-post.mjs` (`POST_TEXT`); publish with `npm run linkedin:chrome` then `BROWSER_URL=http://127.0.0.1:9333 node scripts/linkedin-company-post.mjs --post` (requires logged-in profile).

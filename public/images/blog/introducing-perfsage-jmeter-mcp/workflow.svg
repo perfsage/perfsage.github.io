@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="280" viewBox="0 0 1200 280" role="img" aria-labelledby="wtitle wdesc">
+  <title id="wtitle">PerfSage JMeter MCP workflow</title>
+  <desc id="wdesc">Five-step workflow from environment heal through verdict-led report.</desc>
+  <defs>
+    <linearGradient id="wbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="100%" stop-color="#12182b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="280" rx="28" fill="url(#wbg)"/>
+  <text x="56" y="52" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="700" fill="#f4f7fb">From prompt to verdict</text>
+  <text x="56" y="84" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16" fill="#8b93a7">one agent session · heal · script · discover · p95/p99</text>
+  <g stroke="#2b3758" stroke-width="3" fill="none">
+    <path d="M250 170 H310"/>
+    <path d="M470 170 H530"/>
+    <path d="M690 170 H750"/>
+    <path d="M910 170 H970"/>
+  </g>
+  <g fill="#00d4aa">
+    <polygon points="304,164 318,170 304,176"/>
+    <polygon points="524,164 538,170 524,176"/>
+    <polygon points="744,164 758,170 744,176"/>
+    <polygon points="964,164 978,170 964,176"/>
+  </g>
+  <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <g transform="translate(56 118)">
+      <rect width="194" height="110" rx="16" fill="#141b2e" stroke="#2b3758"/>
+      <text x="20" y="36" font-size="15" fill="#00d4aa" font-family="ui-monospace, Menlo, monospace">01</text>
+      <text x="20" y="64" font-size="20" font-weight="700" fill="#f4f7fb">Heal</text>
+      <text x="20" y="90" font-size="15" fill="#8b93a7">ensure_environment</text>
+    </g>
+    <g transform="translate(276 118)">
+      <rect width="194" height="110" rx="16" fill="#141b2e" stroke="#2b3758"/>
+      <text x="20" y="36" font-size="15" fill="#7c6af7" font-family="ui-monospace, Menlo, monospace">02</text>
+      <text x="20" y="64" font-size="20" font-weight="700" fill="#f4f7fb">Import</text>
+      <text x="20" y="90" font-size="15" fill="#8b93a7">HAR · OpenAPI · Postman</text>
+    </g>
+    <g transform="translate(496 118)">
+      <rect width="194" height="110" rx="16" fill="#141b2e" stroke="#2b3758"/>
+      <text x="20" y="36" font-size="15" fill="#00d4aa" font-family="ui-monospace, Menlo, monospace">03</text>
+      <text x="20" y="64" font-size="20" font-weight="700" fill="#f4f7fb">Correlate</text>
+      <text x="20" y="90" font-size="15" fill="#8b93a7">tokens ’ extractors</text>
+    </g>
+    <g transform="translate(716 118)">
+      <rect width="194" height="110" rx="16" fill="#141b2e" stroke="#2b3758"/>
+      <text x="20" y="36" font-size="15" fill="#7c6af7" font-family="ui-monospace, Menlo, monospace">04</text>
+      <text x="20" y="64" font-size="20" font-weight="700" fill="#f4f7fb">Discover</text>
+      <text x="20" y="90" font-size="15" fill="#8b93a7">knee then 80% load</text>
+    </g>
+    <g transform="translate(936 118)">
+      <rect width="208" height="110" rx="16" fill="#102820" stroke="#00d4aa"/>
+      <text x="20" y="36" font-size="15" fill="#00d4aa" font-family="ui-monospace, Menlo, monospace">05</text>
+      <text x="20" y="64" font-size="20" font-weight="700" fill="#eafff7">Verdict</text>
+      <text x="20" y="90" font-size="15" fill="#7dceb5">p95 · p99 · SLO gate</text>
+    </g>
+  </g>
+</svg>
